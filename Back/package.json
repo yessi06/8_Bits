@@ -20,7 +20,13 @@
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "nodemailer": "^6.9.1",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "google-auth-library": "^8.7.0",
+    "googleapis": "^114.0.0",
+    "hapi-auth-jwt2": "^10.4.0",
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
