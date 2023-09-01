@@ -3,9 +3,6 @@ const { getGames, getGameByname , postGame} = require =('../handlers/gamesHandle
 const gamesHandler = Router();
 
 gamesHandler.get('/', getGames);
-
-gamesHandler.get('/:name', getGameByname);
-
 gamesHandler.post('/', postGame);
 
 
