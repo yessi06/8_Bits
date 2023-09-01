@@ -1,9 +1,11 @@
 const { Router } = require('express');
-const { getGames, getGameByname , postGame} = require =('../handlers/gamesHandlers');
-const gamesHandler = Router();
-
-gamesHandler.get('/', getGames);
-gamesHandler.post('/', postGame);
+const { getGameByName } = require('../handlers/gameHandlers');
 
 
-module.exports = gamesHandler;
+const gamesRouter = Router();
+
+gamesRouter.get('/', getGameByName);
+//gamesHandler.post('/', postGame);
+
+
+module.exports = gamesRouter;
