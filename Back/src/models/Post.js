@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('post', {
+    sequelize.define('post', { 
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -13,17 +13,33 @@ module.exports = (sequelize) => {
             unique: true,
             allowNull: false,
         },
-        image: {
+        image: { 
             type: DataTypes.STRING,
             allowNull: false,
         },
-        content: {
+        description: { 
             type: DataTypes.STRING,
             allowNull: false,
         },
-       date :{
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-      }, { timestamps: false })
+        releaseDate: { 
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+        },
+        supportedPlatforms: { 
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
+        genre: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        price: { 
+            type: DataTypes.DECIMAL(10, 2), 
+            allowNull: false,
+        },
+        review: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+    }, { timestamps: false });
 };
