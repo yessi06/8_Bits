@@ -30,10 +30,37 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User } = sequelize.models;
+const { User, Game, CartItem, Favorites, Gender, Licenses, Order, Post, Shopping, Reviews } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+//Relaciones de usuario
+User.belongsToMany(Game, { through: "user_game" });
+
+// Relaciones de games
+Game.belongsToMany(User, { through: "game_user_reviews" });
+Game.belongsToMany(Gender, { through: 'game_user_reviews' });
+Game.belongsToMany(Reviews, { through: 'game_user_reviews' });
+
+// Relaciones de Favorites
+User.belongsToMany (Favorites, {through: 'favorites_user_game'});
+Favorites.belongsToMany (User, {through: 'favorites_user_game'});
+Game.belongsToMany (Favorites, {through: 'favorites_user_game'});
+Favorites.belongsToMany (Game, {through: 'favorites_user_game'});
+
+// Relaciones de Reviews
+User.belongsToMany (Reviews, {through: 'user_reviews_game'});
+Reviews.belongsToMany (User, {through: 'user_reviews_game'});
+Game.belongsToMany (Reviews, {through: 'user_reviews_game'});
+Reviews.hasOne (Game, {through: 'user_reviews_game'});
+
+// Relaciones de Licenses
+Game.belongsToMany (Licenses, {through: 'licenses_game'});
+Licenses.belongsToMany (Game, {through: 'licenses_game'});
+
+// Relaciones de Post
+User.belongsToMany (Post, {through: 'user_post'});
+Post.hasOne (User, {through: 'user_post'});
+
+
 
 
 
