@@ -6,8 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bits_2r2h
-`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bits_2r2h`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   dialect: 'postgres',
@@ -18,6 +17,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
     }
   }
 });
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -68,11 +68,9 @@ Licenses.belongsToMany (Game, {through: 'licenses_game'});
 User.belongsToMany (Post, {through: 'user_post'});
 Post.hasOne (User, {through: 'user_post'});
 
-
-
-
-
 module.exports = {
   ...sequelize.models, 
   conn: sequelize,
 };
+
+

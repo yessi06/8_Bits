@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('game', {
+    sequelize.define('game', { 
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -13,37 +13,36 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
         },
-        image: {
+        image: { 
             type: DataTypes.STRING,
+            allowNull: false,
         },
-        description: {
-            type: DataTypes.TEXT,
-        },
-        releaseDate: {
+        description: { 
             type: DataTypes.STRING,
+            allowNull: false,
         },
-        supportedPlatforms: {
+        releaseDate: { 
             type: DataTypes.STRING,
+            allowNull: false,
         },
-        genre: {
+        supportedPlatforms: { 
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
+        genre: { 
             type: DataTypes.STRING,
+            allowNull: false,
         },
-        price: {
-            type: DataTypes.INTEGER,
+        price: { 
+            type: DataTypes.DECIMAL, 
+            allowNull: false,
         },
-        review: {
-            type: DataTypes.TEXT,
-        },
-        disable: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        review: { 
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         stock: {
             type: DataTypes.INTEGER,
         },
-    },
-    {
-      timestamps: false,
-    },
-    );
-  };
+    }, { timestamps: false });
+};
