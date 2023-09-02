@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const gamesRouter = require('./gamesRout.js');
-//const genreRouter = require('./genreRout');
+const getGender = require('./genderRout');
 
 const router =  Router();
 
 router.use('/games', gamesRouter);
-//router.use('/genre', genreRouter);
+router.use('/gender', getGender);
 
 module.exports = router;
