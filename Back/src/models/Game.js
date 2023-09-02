@@ -4,40 +4,42 @@ module.exports = (sequelize) => {
     sequelize.define('game', {
         id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false,
         },
         name: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false,
+            unique: true,
+        },
+        image: {
+            type: DataTypes.STRING,
         },
         description: {
             type: DataTypes.TEXT,
-            allowNull: false,
         },
         releaseDate: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
+            type: DataTypes.STRING,
+        },
+        supportedPlatforms: {
+            type: DataTypes.STRING,
+        },
+        genre: {
+            type: DataTypes.STRING,
         },
         price: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+        },
+        review: {
+            type: DataTypes.TEXT,
         },
         disable: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
-            allowNull: false,
         },
         stock: {
             type: DataTypes.INTEGER,
-            defaultValue: 0,
-            allowNull: false,
-        },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: false,
         },
     },
     {

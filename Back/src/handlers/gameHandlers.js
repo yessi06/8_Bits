@@ -1,7 +1,7 @@
-const { getAllGames, gameById } = require('../controllers/gameControllers');
+const { getAllGames, gameById, createGame } = require('../controllers/gameControllers');
 
 
-const getGameByName = async (req, res) => {
+const getGameByNameHandler = async (req, res) => {
     const { name } = req.query;
     const allGames = await getAllGames();
 
@@ -13,9 +13,9 @@ const getGameByName = async (req, res) => {
     } catch (error) {
         res.status(404).json({error: error.message});
     }
-}
+};
 
-const getGameById = async (req, res) => {
+const getGameByIdHandler = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -24,6 +24,19 @@ const getGameById = async (req, res) => {
     } catch (error) {
         res.status(404).json({error: error.message})
     }
-}
+};
 
-module.exports = { getGameByName, getGameById }
+const createGameHandler = async (req, res) =>{
+    try{
+        const prueba = req.body;
+        console.log(prueba);
+        const {name, image, description, releaseDate, supportedPlatforms, genre, price, review } = req.body
+        const newGame = await createGame(name, image, description, releaseDate, supportedPlatforms, genre, price, review);
+        res.status(201).json("Successfully Created")
+
+    }catch (error) {
+        res.status(404).json({error: error.message})
+    }
+};
+
+module.exports = { getGameByNameHandler, getGameByIdHandler, createGameHandler }
