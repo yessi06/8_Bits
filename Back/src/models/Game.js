@@ -1,47 +1,45 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('game', {
+    sequelize.define('game', { 
         id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false,
         },
         name: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
         },
-        description: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-        releaseDate: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
-        },
-        price: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        disable: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-            allowNull: false,
-        },
-        stock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-            allowNull: false,
-        },
-        image: {
+        image: { 
             type: DataTypes.STRING,
             allowNull: false,
         },
-    },
-    {
-      timestamps: false,
-    },
-    );
-  };
+        description: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        releaseDate: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        supportedPlatforms: { 
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
+        genre: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        price: { 
+            type: DataTypes.DECIMAL, 
+            allowNull: false,
+        },
+        review: { 
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+    }, { timestamps: false });
+};
