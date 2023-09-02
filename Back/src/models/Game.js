@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false,
+            unique: true,
         },
         image: { 
             type: DataTypes.STRING,
@@ -40,6 +40,9 @@ module.exports = (sequelize) => {
         review: { 
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        stock: {
+            type: DataTypes.INTEGER,
         },
     }, { timestamps: false });
 };
