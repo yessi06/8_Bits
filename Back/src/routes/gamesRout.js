@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { getGameByName } = require('../handlers/gameHandlers');
+const { getGameByNameHandler, getGameByIdHandler } = require('../handlers/gameHandlers');
 const { createGame } = require('../controllers/saveGames/saveGames');
 
 const gamesRouter = Router();
