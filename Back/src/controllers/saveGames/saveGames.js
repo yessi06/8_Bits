@@ -1,4 +1,4 @@
-const { Game } = require('../../db.js');
+const { Game, Gender } = require('../../db.js');
 
 const gamesArray = [
   {
@@ -323,10 +323,73 @@ async function createGame(req, res) {
     console.error('Error al crear los juegos', error);
     res.status(500).json({ error: 'Error al crear los juegos' }); // Aquí debes usar "res" en lugar de "req"
   }
-}
+};
 
+
+const gameGenres = [
+  "Action",
+  "Adventure",
+  "Role-Playing (RPG)",
+  "First-Person Shooter (FPS)",
+  "Third-Person Shooter (TPS)",
+  "Platformer",
+  "Racing",
+  "Sports",
+  "Simulation",
+  "Strategy",
+  "Puzzle",
+  "Fighting",
+  "Survival Horror",
+  "Open World",
+  "Sandbox",
+  "Stealth",
+  "Tactical",
+  "Educational",
+  "Music/Rhythm",
+  "Party/Mini-Games",
+  "Card and Board Games",
+  "Visual Novel",
+  "Point-and-Click",
+  "Horror",
+  "Science Fiction (Sci-Fi)",
+  "Fantasy",
+  "Historical",
+  "Western",
+  "Anime",
+  "Cartoon/Cel-Shaded",
+  "Mystery",
+  "Interactive Fiction",
+  "Roguelike/Roguelite",
+  "Metroidvania",
+  "Tower Defense",
+  "MOBA (Multiplayer Online Battle Arena)",
+  "Battle Royale",
+  "MMO (Massively Multiplayer Online)",
+  "Farming/Simulation",
+  "City Building/Management",
+  "Life Simulation",
+  "Action RPG",
+  "Roguelike",
+  "Action-Adventure",
+  "JRPG"
+];
+ 
+async function loadGenres(req, res) {
+  try {
+
+ const genres = await gameGenres.forEach((genre)=>{
+    Gender.findOrCreate({
+      where:{name:genre}
+    })
+  });  
+    res.status(201).json({ message: 'Genres loaded with success', genres });
+  } catch (error) {
+    console.error('Error loading genres', error);
+    res.status(500).json({ error: 'Error loading genres' }); 
+  }
+};
 
 module.exports ={
   createGame,
+  loadGenres
 }
-
