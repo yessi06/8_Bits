@@ -8,7 +8,7 @@ const getAllGames = async () => {
 };
 
 const gameById = async (id) => {
-    const gameID = await Game.findByPK(id)
+    const gameID = await Game.findByPk(id)
     return gameID;
 };
 
