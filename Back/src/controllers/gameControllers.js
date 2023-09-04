@@ -27,4 +27,5 @@ const createGame = async (name, image, description, releaseDate, supportedPlatfo
     return newGame;
 };
 
+
 module.exports = { getAllGames, gameById, createGame };
