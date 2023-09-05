@@ -371,7 +371,8 @@ const gameGenres = [
   "Action RPG",
   "Roguelike",
   "Action-Adventure",
-  "JRPG"
+  "JRPG",
+  "RPG"
 ];
  
 async function loadGenres(req, res) {
