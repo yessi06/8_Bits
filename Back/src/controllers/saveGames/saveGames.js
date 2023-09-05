@@ -329,9 +329,9 @@ async function createGame(req, res) {
 const gameGenres = [
   "Action",
   "Adventure",
-  "Role-Playing (RPG)",
-  "First-Person Shooter (FPS)",
-  "Third-Person Shooter (TPS)",
+  "Role-Playing",
+  "First-Person Shooter",
+  "Third-Person Shooter",
   "Platformer",
   "Racing",
   "Sports",
