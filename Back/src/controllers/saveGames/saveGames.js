@@ -318,10 +318,10 @@ async function createGame(req, res) {
         review,
       });
     }
-    res.status(201).json({ message: 'Juegos creados con éxito' });
+    res.status(201).json({ message: 'Games Create success' });
   } catch (error) {
-    console.error('Error al crear los juegos', error);
-    res.status(500).json({ error: 'Error al crear los juegos' }); // Aquí debes usar "res" en lugar de "req"
+    console.error('Error creating games', error);
+    res.status(500).json({ error: 'Error creating games' }); 
   }
 };
 
@@ -329,9 +329,9 @@ async function createGame(req, res) {
 const gameGenres = [
   "Action",
   "Adventure",
-  "Role-Playing (RPG)",
-  "First-Person Shooter (FPS)",
-  "Third-Person Shooter (TPS)",
+  "Role-Playing",
+  "First-Person Shooter",
+  "Third-Person Shooter",
   "Platformer",
   "Racing",
   "Sports",
