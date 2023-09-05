@@ -19,17 +19,12 @@ const getGameByNameHandler = async (req, res) => {
 
 const getGameByIdHandler = async (req, res) => {
     const { id } = req.params;
-    const gameTotal = await getAllGames(id)
-    const gameId = gameTotal.find(gameById => gameById.id == id)
-    if(gameId){
 
-        try {
-            return res.status(200).send([gameId])
-        } catch (error) {
-            res.status(404).send({error: error.message})
-        }
-    } else {
-        return res.send({error: 'Game not found'})
+    try {
+        const game = await gameById(id)
+        res.status(200).json(game)
+    } catch (error) {
+        res.status(404).json({error: error.message})
     }
 };
 
@@ -47,8 +42,7 @@ const createGameHandler = async (req, res) =>{
 };
 
 const filterGameHandler = async (req, res) => {
-    const { genre, sortByPrice, supportedPlatforms } = req.query;
-
+    const { genre, price, supportedPlatforms } = req.query;
     try {
         let games;
 
@@ -58,9 +52,9 @@ const filterGameHandler = async (req, res) => {
             options.where = { genre };
         }
         
-        if(sortByPrice === 'Asc') {
+        if(price === 'Asc') {
             options.order = [['price', 'ASC']] // El order hace la funcion de ordenar segun los parametro pasados
-        } else if(sortByPrice === 'Desc') {
+        } else if(price === 'Desc') {
             options.order = [['price', 'DESC']]
         }
 
@@ -78,7 +72,6 @@ const filterGameHandler = async (req, res) => {
           }
 
         games = await Game.findAll(options);
-
         res.status(200).json(games);
     } catch (error) {
         res.status(404).json({error: error.message})
