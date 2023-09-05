@@ -19,12 +19,17 @@ const getGameByNameHandler = async (req, res) => {
 
 const getGameByIdHandler = async (req, res) => {
     const { id } = req.params;
+    const gameTotal = await getAllGames(id)
+    const gameId = gameTotal.find(gameById => gameById.id == id)
+    if(gameId){
 
-    try {
-        const game = await gameById(id)
-        res.status(200).json(game)
-    } catch (error) {
-        res.status(404).json({error: error.message})
+        try {
+            return res.status(200).send([gameId])
+        } catch (error) {
+            res.status(404).send({error: error.message})
+        }
+    } else {
+        return res.send({error: 'Game not found'})
     }
 };
 

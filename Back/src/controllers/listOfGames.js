@@ -301,6 +301,3 @@ const gamesArray = [
     }
   ];
  module.exports = {gamesArray};
-
- //Ok
- 
