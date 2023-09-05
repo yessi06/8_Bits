@@ -17,7 +17,7 @@ const postGame = async (req, res) => {
             genre,
             price,
             review,
-            stock 
+            stock,
         });
 
         res.status(201).json(newGame);

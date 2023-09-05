@@ -18,9 +18,4 @@ gamesRouter.post('/filter', filterGameHandler);
 gamesRouter.post('/postGame', postGame);
 
 
-
-
-
-
-
 module.exports = gamesRouter;
