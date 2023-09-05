@@ -13,8 +13,8 @@ gamesRouter.post('/saveGames', createGame);
 
 
 gamesRouter.get('/', getGameByNameHandler);
+gamesRouter.get('/filter', filterGameHandler);
 gamesRouter.get('/:id', getGameByIdHandler);
-gamesRouter.post('/filter', filterGameHandler);
 gamesRouter.post('/postGame', postGame);
 
 
