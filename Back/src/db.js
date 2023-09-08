@@ -1,11 +1,13 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, 
+  DB_PASSWORD, 
+  DB_HOST,
 } = process.env;
-
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bits_2r2h`, {
   logging: false, // set to console.log to see the raw SQL queries
