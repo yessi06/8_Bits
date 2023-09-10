@@ -49,7 +49,15 @@ const filterGameHandler = async (req, res) => {
         const options = {}; //Objeto donde se van guardando todas las opciones de filtrado
 
         if(genre && genre !== 'All') {
-            options.where = { genre };
+            //options.where = { genre };
+            const genres = genre.split(",");
+
+            options.where = {
+                ...options.where,
+                genre: {
+                    [Op.overlap]: genres,
+                },
+            };
         }
         
         if(price === 'Asc') {
