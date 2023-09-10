@@ -10,7 +10,7 @@ const getGameByNameHandler = async (req, res) => {
     try {
         if(!name) return res.status(200).json(allGames)
         const filterByName = allGames.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()))
-        if(filterByName.length === 0) return res.status(200).json(`Don't exist Match with ${name}`)
+        if(filterByName.length === 0) return res.status(200).json(`There are no results for ${name}`)
         res.status(200).json(filterByName)
     } catch (error) {
         res.status(404).json({error: error.message});
