@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        genre: { 
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
         description: { 
             type: DataTypes.STRING,
             allowNull: false,
@@ -29,10 +33,6 @@ module.exports = (sequelize) => {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
         },
-        genre: { 
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         price: { 
             type: DataTypes.DECIMAL, 
             allowNull: false,
@@ -43,6 +43,7 @@ module.exports = (sequelize) => {
         },
         stock: {
             type: DataTypes.INTEGER,
+            allowNull: false,
         },
     }, { timestamps: false });
 };
