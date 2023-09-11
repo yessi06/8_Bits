@@ -6,6 +6,8 @@ const cors = require ('cors');
 const routerPf = require('./routes/index.js');
 const cloudinary = require('cloudinary').v2;
 const {CLOUD_NAME, API_KEY, API_SECRET} = process.env
+const session = require('express-session');
+const passport = require('./passportConfig.js');
 
 console.log(CLOUD_NAME, API_KEY, API_SECRET);
 cloudinary.config({
@@ -28,8 +30,17 @@ server.use(express.urlencoded({ extended: true }));
 server.use(cors());
 server.use(morgan('dev')); 
 
+server.use(session({
+    secret: '8-bits',
+    resave: false,
+    saveUninitialized: true,
+}));
+
+server.use(passport.initialize());
+server.use(passport.session());
 //Aqui van las rutas
 server.use(routerPf);
+
 
 server.use((req, res, next) => { 
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); 
