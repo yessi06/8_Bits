@@ -1,11 +1,11 @@
 const {sendMail} = require('../helpers/mailer')
 
-const mailerHandler =  (req, res)=>{
+const mailerHandler = async (req, res)=>{
     const{name, email, phone, text} = req.body;
 
     try{
-        sendMail(name, email, text);
-        res.status(200).json("enviado")
+        const results= await sendMail(name, email, text);
+        res.status(200).json(results)
     }catch(error){
         res.status(404).json({error: error.message});
     }
