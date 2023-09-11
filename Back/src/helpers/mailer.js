@@ -34,7 +34,7 @@ async function sendMail(name, email, text){
             from:"8 Bits <8eigthbits@gmail.com>",
             to: email,
             subject:"Welcome to 8 Bits",
-            text: `Hi ${name}, ${text}`
+            text: `Hi ${name}, Welcome to our exciting online video game store! Here, your passion for video games comes to life. Explore a vast catalog of titles, from exciting adventures to challenging strategy games. Find exclusive offers, discover the latest releases, and connect with a community of passionate gamers. Get ready to dive into the world of gaming like never before!`
         };  
 
         const result = await transporter.sendMail(mailOptions)

@@ -1,4 +1,5 @@
 const { User } = require('../db');
+const {sendMail} = require('../helpers/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
 
@@ -12,7 +13,9 @@ const createUser = async (req, res) => {
         const user = await User.create({
             name, lastname, email, password: hashedPassword, admin: false,
         })
+        
         res.status(201).json(user)
+        sendMail(name, email)
     } catch (error) {
         res.status(500).json({error: error.message})
     }

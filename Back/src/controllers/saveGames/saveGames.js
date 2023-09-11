@@ -58,7 +58,7 @@ const gamesArray = [
   },
   {
       "name": "God of War (2018)",
-      "image": "https://res.cloudinary.com/bits8/image/upload/v1694109037/toeqcqyhehvc2ouvfe2w.jpg",
+      "image": "https://res.cloudinary.com/bits8/image/upload/v1694453489/vnvuw2f6jwgvxrv51iuz.jpg",
       "description": "Kratos returns, this time in Norse mythology, on a quest with his son Atreus.",
       "releaseDate": "April 20, 2018",
       "supportedPlatforms": ["PlayStation 4", "PlayStation 5"],
@@ -69,7 +69,7 @@ const gamesArray = [
   },
   {
       "name": "Dark Souls III",
-      "image": "https://res.cloudinary.com/bits8/image/upload/v1694109053/zlwvlzkcclxk4ez7eegi.jpg",
+      "image": "https://res.clouinary.com/bits8/image/upload/v1694109053/zlwvlzkcclxk4ez7eegi.jpg",
       "description": "A challenging action RPG that tests your skills and patience in a dark and beautifully designed world.",
       "releaseDate": "April 12, 2016",
       "supportedPlatforms": ["PC", "PlayStation 4", "Xbox One"],
@@ -289,7 +289,7 @@ const gamesArray = [
   },
   {
       "name": "Demon's Souls (2020)",
-      "image": "https://res.cloudinary.com/bits8/image/upload/v1694448922/rsyld1ppvsbovg7cp8cq.png",
+      "image": "https://res.cloudinary.com/bits8/image/upload/v1694452745/tsnn3dbictj1fvkog2yr.jpg",
       "description": "A remake of the classic action RPG, known for its punishing difficulty and breathtaking visuals.",
       "releaseDate": "November 12, 2020",
       "supportedPlatforms": ["PlayStation 5"],
