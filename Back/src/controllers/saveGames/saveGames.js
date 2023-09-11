@@ -69,7 +69,7 @@ const gamesArray = [
   },
   {
       "name": "Dark Souls III",
-      "image": "https://res.cloudinary.com/bits8/image/upload/v1694109053/zlwvlzkcclxk4ez7eegi.jpg",
+      "image": "https://res.clouinary.com/bits8/image/upload/v1694109053/zlwvlzkcclxk4ez7eegi.jpg",
       "description": "A challenging action RPG that tests your skills and patience in a dark and beautifully designed world.",
       "releaseDate": "April 12, 2016",
       "supportedPlatforms": ["PC", "PlayStation 4", "Xbox One"],
