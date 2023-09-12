@@ -15,7 +15,7 @@ const loginGoogle = async (req, res) => {
         const user = await findUser(email)
 
         if(user) {
-        return res.status(200).json(user)
+        return res.status(200).json({message: 'Successful login', user})
         }   
         else {
             const newUser = await createUserGoogle({
@@ -26,7 +26,7 @@ const loginGoogle = async (req, res) => {
                 disable: false,
                 admin: false,
             });
-            return res.status(200).json(newUser);
+            return res.status(200).json({message: 'Successful login', newUser});
         }
 
     } catch (error) {
