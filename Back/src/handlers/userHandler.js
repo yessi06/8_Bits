@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
     try {
         // const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
-            name, lastname, email, password: hashedPassword, admin: false,
+            name, lastname, email, password, admin: false,
         })
         
         res.status(201).json(user)
