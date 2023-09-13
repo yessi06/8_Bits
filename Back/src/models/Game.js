@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('game', { 
+    sequelize.define('Game', { 
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -17,20 +17,12 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        genre: { 
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false,
-        },
         description: { 
             type: DataTypes.STRING,
             allowNull: false,
         },
         releaseDate: { 
             type: DataTypes.STRING,
-            allowNull: false,
-        },
-        supportedPlatforms: { 
-            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
         },
         price: { 

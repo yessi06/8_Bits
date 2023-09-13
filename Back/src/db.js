@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
 const path = require('path');
-const supportedPlatforms = require('./models/supportedPlatforms');
+const supportedPlatforms = require('./models/SupportedPlatform');
 const {
   DB_USER, 
   DB_PASSWORD, 
@@ -42,21 +42,30 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Game, CartItem, Favorites, Gender, Licenses, Order, Post, Shopping, Reviews } = sequelize.models;
-
-//Relaciones de usuario
-User.belongsToMany(Game, { through: "user_game" });
+const { User, Game, CartItem, Favorites, Gender, Licenses, Order, Post, Shopping, Reviews, SupportedPlatform } = sequelize.models;
 
 // Relaciones de games
-// Game.belongsToMany(User, { through: "game_user_reviews_gender" });
-// Game.belongsToMany(Gender, { through: 'game_user_reviews_gender' });
-// Game.belongsToMany(Reviews, { through: 'game_user_reviews_gender' });
+Game.belongsToMany(Gender, { through: 'game_gender' });
+Gender.belongsToMany(Game, { through: 'game_gender' });
+
+Game.belongsToMany(SupportedPlatform, { through: 'game_supportedPlatform' });
+SupportedPlatform.belongsToMany(Game, { through: 'game_supportedPlatform' });
+
+
+
+
+//Game.belongsToMany(User, { through: "game_user_reviews_gender" });
+//Game.belongsToMany(Reviews, { through: 'game_user_reviews_gender' });
+
+//Relaciones de usuario
+//User.belongsToMany(Game, { through: "user_game" });
+
 
 // Relaciones de Favorites
-User.belongsToMany (Favorites, {through: 'favorites_user_game'});
-Favorites.belongsToMany (User, {through: 'favorites_user_game'});
-Game.belongsToMany (Favorites, {through: 'favorites_user_game'});
-Favorites.belongsToMany (Game, {through: 'favorites_user_game'});
+// User.belongsToMany (Favorites, {through: 'favorites_user_game'});
+// Favorites.belongsToMany (User, {through: 'favorites_user_game'});
+// Game.belongsToMany (Favorites, {through: 'favorites_user_game'});
+// Favorites.belongsToMany (Game, {through: 'favorites_user_game'});
 
 // Relaciones de Reviews
 // User.belongsToMany (Reviews, {through: 'user_reviews_game'});
@@ -64,17 +73,17 @@ Favorites.belongsToMany (Game, {through: 'favorites_user_game'});
 // Game.belongsToMany (Reviews, {through: 'user_reviews_game'});
 // Reviews.hasOne (Game, {through: 'user_reviews_game'});
 
-// Relaciones de Licenses
-Game.belongsToMany (Licenses, {through: 'licenses_game'});
-Licenses.belongsToMany (Game, {through: 'licenses_game'});
+// // Relaciones de Licenses
+// Game.belongsToMany (Licenses, {through: 'licenses_game'});
+// Licenses.belongsToMany (Game, {through: 'licenses_game'});
 
-// Relaciones de Post
-User.belongsToMany (Post, {through: 'user_post'});
-Post.hasOne (User, {through: 'user_post'});
+// // Relaciones de Post
+// User.belongsToMany (Post, {through: 'user_post'});
+// Post.hasOne (User, {through: 'user_post'});
 
-// // //Relaciones Games, FK supportedPlatform y Genre
-Game.belongsToMany (Gender, { through: "game_FK" });
-Gender.belongsToMany (Game, { through: "game_FK" });
+// // // //Relaciones Games, FK supportedPlatform y Genre
+// Game.belongsToMany (Gender, { through: "game_FK" });
+// Gender.belongsToMany (Game, { through: "game_FK" });
 
 // Game.belongsToMany (supportedPlatforms, { through: "user_game" });
 // supportedPlatforms.belongsToMany (Game, { through: "user_game" });
