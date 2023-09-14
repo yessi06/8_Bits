@@ -1,4 +1,4 @@
-const { Game, Gender, SupportedPlatform } = require('../../db.js');
+const { Game, Genre, SupportedPlatform } = require('../../db.js');
 
 const gamesArray = [
   {
@@ -336,7 +336,7 @@ const gamesArray = [
 async function createGame(req, res) {
   try {
     for (const gameData of gamesArray) {
-      const { name, image, description, releaseDate, supportedPlatform, genre, price, review, stock } = gameData;
+      const { name, image, description, releaseDate, supportedPlatforms, genre, price, review, stock } = gameData;
       const newGame = await Game.create({
         name,
         image,
@@ -348,16 +348,17 @@ async function createGame(req, res) {
       });
 
       for (const genreName of genre) {
-        const genreInstance = await Gender.findOne({ where: { name: genreName } });
+        const genreInstance = await Genre.findOne({ where: { name: genreName } });
         if (genreInstance) {
-          await newGame.addGender(genreInstance);
+          await newGame.addGenre(genreInstance);
         }
       }
 
-      for (const platformName of supportedPlatform) {
+      for (const platformName of supportedPlatforms) {
+        console.log(platformName, "platforname");
         const platformInstance = await SupportedPlatform.findOne({ where: { name: platformName } });
         if (platformInstance) {
-          await newGame.addSupportedPlatform(platformInstance);
+          await newGame.addSupportedPlatform  (platformInstance);
         }
       }
     }
@@ -367,8 +368,6 @@ async function createGame(req, res) {
     res.status(500).json({ error: 'Error creating games' });
   }
 }
-
-
 
 const gameGenres = [
   "Action",
@@ -423,7 +422,7 @@ const gameGenres = [
 async function loadGenres(req, res) {
   try {
     const genres = await gameGenres.forEach((genre) => {
-      Gender.findOrCreate({
+      Genre.findOrCreate({
         where: { name: genre }
       })
     });

@@ -1,14 +1,8 @@
-const { Game, Gender, SupportedPlatform } = require("../db.js");
+const { Game, Genre, SupportedPlatform } = require("../../db.js");
 
 const postGame = async (req, res) => {
     try {
         const { name, image, description, releaseDate, supportedPlatform, genre, price, review, stock } = req.body;
-
-        // Comprobación de campos obligatorios
-        if (!name || !image || !description || !releaseDate || !supportedPlatform || !genre || !price || !review || !stock) {
-            return res.status(400).json({ error: "Missing required fields" });
-        }
-
         // Crear un nuevo juego
         const newGame = await Game.create({
             name,
@@ -22,11 +16,11 @@ const postGame = async (req, res) => {
 
         // Asociar géneros
         for (const genreName of genre) {
-            const genreInstance = await Gender.findOne({ where: { name: genreName } });
+            const genreInstance = await Genre.findOne({ where: { name: genreName } });
             if (genreInstance) {
-              await newGame.addGender(genreInstance);
+              await newGame.addGenre(genreInstance);
             } else {
-              console.warn(`No se encontró el género: ${genreName}`);
+              console.warn(`The Genre was not found: ${genreName}`);
             }
         }
 
