@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const { getAllGames, gameById, createGame } = require('../controllers/gameControllers');
-const { Game } = require('../db');
+const { Game, Gender, SupportedPlatform } = require('../db');
 
 
 const getGameByNameHandler = async (req, res) => {
@@ -42,43 +42,57 @@ const createGameHandler = async (req, res) =>{
 };
 
 const filterGameHandler = async (req, res) => {
-    const { genre, price, supportedPlatforms } = req.query;
+    let { Genders, price, SupportedPlatforms } = req.query;
+
+    if (typeof Genders === 'string' && Genders !== 'All') {
+        Genders = Genders.split(',');
+    } else {
+        Genders = [];
+    }
+
+    if (typeof SupportedPlatforms === 'string') {
+        SupportedPlatforms = SupportedPlatforms.split(',');
+    } else {
+        SupportedPlatforms = [];
+    }
+
     try {
         let games;
 
         const options = {}; //Objeto donde se van guardando todas las opciones de filtrado
 
-        if(genre && genre !== 'All') {
-            //options.where = { genre };
-            const genres = genre.split(",");
-
-            options.where = {
-                ...options.where,
-                genre: {
-                    [Op.overlap]: genres,
+        if (Genders.length > 0) {
+            options.include = options.include || [];
+            options.include.push({
+                model: Gender,
+                where: {
+                    name: {
+                        [Op.in]: Genders,
+                    },
                 },
-            };
+                as: 'Genders',
+            });
         }
-        
+
         if(price === 'Asc') {
             options.order = [['price', 'ASC']] // El order hace la funcion de ordenar segun los parametro pasados
         } else if(price === 'Desc') {
             options.order = [['price', 'DESC']]
         }
 
-        if (supportedPlatforms) {
-            // Convierte la lista de plataformas en un arreglo si se proporciona
-            const platforms = supportedPlatforms.split(',');
-      
-            // Agrega la condición de compatibilidad con al menos una plataforma
-            options.where = {
-              ...options.where,
-              supportedPlatforms: {
-                [Op.overlap]: platforms,
-              },
-            };
-          }
-
+        if (SupportedPlatforms.length > 0) {
+            options.include = options.include || [];
+            options.include.push({
+                model: SupportedPlatform,
+                where: {
+                    name: {
+                        [Op.in]: SupportedPlatforms,
+                    },
+                },
+                as: 'SupportedPlatforms',
+            });
+        }
+        console.log(options)
         games = await Game.findAll(options);
         res.status(200).json(games);
     } catch (error) {

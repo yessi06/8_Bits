@@ -49,4 +49,9 @@ const loginUser = (req, res, next) => {
     // failureFlash: true
     )(req, res, next);
 };
-module.exports = { createUser, getUsers , loginUser};
+
+const logOutUser = (req, res) => {
+    req.logout();
+    res.status(200).json({ message: 'Logout successful' });
+}
+module.exports = { createUser, getUsers , loginUser, logOutUser };
