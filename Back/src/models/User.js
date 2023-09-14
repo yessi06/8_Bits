@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     lastname: {
       type: DataTypes.STRING,
@@ -33,11 +33,11 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     disable: {
       type: DataTypes.BOOLEAN,
