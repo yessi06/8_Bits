@@ -1,6 +1,6 @@
 const { User } = require('../db');
 const axios = require('axios')
-const { findUser, createUserGoogle} = require('../controllers/googleAuthController')
+const { findUser, createUserGoogle} = require('../controllers/googleAuthControllers/googleAuthController')
 
 const loginGoogle = async (req, res) => {
     const { token } = req.body

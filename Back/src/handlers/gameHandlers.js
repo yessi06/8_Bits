@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 
-const { getAllGames, gameById } = require('../controllers/gameControllers');
-const { Game, Gender, SupportedPlatform } = require('../db');
+const { getAllGames, gameById } = require('../controllers/gameControllers/gameControllers');
+const { Game, Genre, SupportedPlatform } = require('../db');
 
 const getGameByNameHandler = async (req, res) => {
     const { name } = req.query;
@@ -29,12 +29,12 @@ const getGameByIdHandler = async (req, res) => {
 };
 
 const filterGameHandler = async (req, res) => {
-    let { Genders, price, SupportedPlatforms } = req.query;
+    let { Genres, price, SupportedPlatforms } = req.query;
 
-    if (typeof Genders === 'string' && Genders !== 'All') {
-        Genders = Genders.split(',');
+    if (typeof Genres === 'string' && Genres !== 'All') {
+        Genres = Genres.split(',');
     } else {
-        Genders = [];
+        Genres = [];
     }
 
     if (typeof SupportedPlatforms === 'string') {
@@ -48,16 +48,16 @@ const filterGameHandler = async (req, res) => {
 
         const options = {}; //Objeto donde se van guardando todas las opciones de filtrado
 
-        if (Genders.length > 0) {
+        if (Genres.length > 0) {
             options.include = options.include || [];
             options.include.push({
-                model: Gender,
+                model: Genre,
                 where: {
                     name: {
-                        [Op.in]: Genders,
+                        [Op.in]: Genres,
                     },
                 },
-                as: 'Genders',
+                as: 'Genres',
             });
         }
 
