@@ -1,4 +1,4 @@
-const {sendMail} = require('../helpers/mailer')
+const {sendMail} = require('../helpers/nodemailer/mailer')
 
 const mailerHandler = async (req, res)=>{
     const{name, email, phone, text} = req.body;

@@ -1,9 +1,8 @@
 const { Router } = require('express');
-
 const { getGameByNameHandler, getGameByIdHandler, filterGameHandler } = require('../handlers/gameHandlers');
-
-const { createGame } = require('../controllers/saveGames/saveGames');
-const { postGame } = require('../controllers/postGame');
+const { createGame } = require('../controllers/saveGamesControllers/saveGames');
+const { postGame } = require('../controllers/gameControllers/postGame');
+const {validatePostGame} = require('../middleware/validate')
 
 
 const gamesRouter = Router();
@@ -15,7 +14,7 @@ gamesRouter.post('/saveGames', createGame);
 gamesRouter.get('/', getGameByNameHandler);
 gamesRouter.get('/filter', filterGameHandler);
 gamesRouter.get('/:id', getGameByIdHandler);
-gamesRouter.post('/postGame', postGame);
+gamesRouter.post('/postGame', validatePostGame, postGame);
 
 
 module.exports = gamesRouter;

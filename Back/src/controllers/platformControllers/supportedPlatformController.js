@@ -1,4 +1,4 @@
-const { SupportedPlatform } = require('../db');
+const { SupportedPlatform } = require('../../db');
 
 const postSupportedPlatform = async () => {
     const supportedPlatformList = await SupportedPlatform.findAll();

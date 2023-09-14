@@ -1,12 +1,10 @@
 const { User } = require('../db');
-const {sendMail} = require('../helpers/mailer');
+const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
 
 const createUser = async (req, res) => {
-    const { name, lastname, email, password } = req.body
-
-    if(!name || !lastname || !email || !password) return res.status(400).json({error: 'Missing data'})
+    const { name, lastname, email, password } = req.body;
 
     try {
         // const hashedPassword = await bcrypt.hash(password, 10);

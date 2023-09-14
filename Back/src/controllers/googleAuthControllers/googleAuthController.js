@@ -1,4 +1,4 @@
-const { User } = require('../db')
+const { User } = require('../../db')
 
 const findUser = async (email) => {
     const existingUser = await User.findOne({

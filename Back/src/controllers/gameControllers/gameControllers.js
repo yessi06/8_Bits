@@ -1,12 +1,12 @@
 require('dotenv').config();
-const { Game, Gender, SupportedPlatform } = require('../db');
+const { Game, Genre, SupportedPlatform } = require('../../db');
 
 const getAllGames = async () => {
     try {
         const data = await Game.findAll({
             include: [
                 {
-                    model: Gender,
+                    model: Genre,
                     attributes: ["name"],
                     through: {
                         attributes: [],
@@ -34,7 +34,7 @@ const gameById = async (id) => {
         const gameID = await Game.findByPk(id, {
             include: [
                 {
-                    model: Gender,
+                    model: Genre,
                     attributes: ["name"],
                     through: {
                         attributes: [],

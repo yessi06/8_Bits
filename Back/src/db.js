@@ -10,6 +10,8 @@ const {
   DB_HOST,
 } = process.env;
 
+
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bits_2r2h`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -42,11 +44,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Game, Favorites, Gender, Licenses, Order, Post, Shopping, Reviews, SupportedPlatform } = sequelize.models;
+const { User, Game, Favorites, Genre, Licenses, Order, Post, Shopping, Reviews, SupportedPlatform } = sequelize.models;
 
 // Relaciones de games
-Game.belongsToMany(Gender, { through: 'game_gender' });
-Gender.belongsToMany(Game, { through: 'game_gender' });
+Game.belongsToMany(Genre, { through: 'game_genre' });
+Genre.belongsToMany(Game, { through: 'game_genre' });
 
 Game.belongsToMany(SupportedPlatform, { through: 'game_supportedPlatform' });
 SupportedPlatform.belongsToMany(Game, { through: 'game_supportedPlatform' });
