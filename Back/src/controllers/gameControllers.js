@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { Game, Gender, SupportedPlatform } = require('../db');
-const { gameArray } = require('../controllers/listOfGames');
 
 const getAllGames = async () => {
     try {
@@ -57,23 +56,9 @@ const gameById = async (id) => {
     }
 };
 
-const createGame = async (name, image, description, releaseDate, supportedPlatforms, genre, price, review) =>{
-    console.log(gameArray);
-    const newGame = await Game.create({
-        name,
-        image,
-        description,
-        releaseDate,
-        supportedPlatforms,
-        genre,
-        price,
-        review
-    });
-    return newGame;
-};
 
 module.exports = {
     getAllGames,
     gameById,
-    createGame,
+
 };

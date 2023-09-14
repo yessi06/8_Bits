@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
-const { getAllGames, gameById, createGame } = require('../controllers/gameControllers');
-const { Game, Gender, SupportedPlatform } = require('../db');
 
+const { getAllGames, gameById } = require('../controllers/gameControllers');
+const { Game, Gender, SupportedPlatform } = require('../db');
 
 const getGameByNameHandler = async (req, res) => {
     const { name } = req.query;
@@ -24,19 +24,6 @@ const getGameByIdHandler = async (req, res) => {
         const game = await gameById(id)
         res.status(200).json(game)
     } catch (error) {
-        res.status(404).json({error: error.message})
-    }
-};
-
-const createGameHandler = async (req, res) =>{
-    try{
-        const prueba = req.body;
-        console.log(prueba);
-        const {name, image, description, releaseDate, supportedPlatforms, genre, price, review } = req.body
-        const newGame = await createGame(name, image, description, releaseDate, supportedPlatforms, genre, price, review);
-        res.status(201).json("Successfully Created")
-
-    }catch (error) {
         res.status(404).json({error: error.message})
     }
 };
@@ -100,4 +87,4 @@ const filterGameHandler = async (req, res) => {
     }
 }
 
-module.exports = { getGameByNameHandler, getGameByIdHandler, createGameHandler, filterGameHandler }
+module.exports = { getGameByNameHandler, getGameByIdHandler, filterGameHandler }
