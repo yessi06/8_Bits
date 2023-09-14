@@ -336,7 +336,7 @@ const gamesArray = [
 async function createGame(req, res) {
   try {
     for (const gameData of gamesArray) {
-      const { name, image, description, releaseDate, supportedPlatforms, genre, price, review, stock } = gameData;
+      const { name, image, description, releaseDate, supportedPlatform, genre, price, review, stock } = gameData;
       const newGame = await Game.create({
         name,
         image,
@@ -354,7 +354,7 @@ async function createGame(req, res) {
         }
       }
 
-      for (const platformName of supportedPlatforms) {
+      for (const platformName of supportedPlatform) {
         const platformInstance = await SupportedPlatform.findOne({ where: { name: platformName } });
         if (platformInstance) {
           await newGame.addSupportedPlatform(platformInstance);
@@ -466,4 +466,4 @@ module.exports = {
   createGame,
   loadGenres,
   loadSupportedPlatform,
-}
+};
