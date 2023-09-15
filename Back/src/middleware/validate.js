@@ -9,7 +9,11 @@ next();
 const validateCreateUser = (req, res, next)=>{
     const { name, lastname, email, password } = req.body
 
-    if(!name || !lastname || !email || !password) return res.status(400).json({error: 'Missing data'})
+    if(!name || !lastname || !email || !password) {
+        return res.status(400).json({error: 'Missing data'})
+    }
+
+    next();
 }
 
 module.exports = {validatePostGame, validateCreateUser}
