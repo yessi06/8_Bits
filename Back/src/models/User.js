@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    nickName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -31,13 +31,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     disable: {
       type: DataTypes.BOOLEAN,
@@ -47,7 +55,7 @@ module.exports = (sequelize) => {
     admin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    },  
+    },
   },
     {
       timestamps: false,
