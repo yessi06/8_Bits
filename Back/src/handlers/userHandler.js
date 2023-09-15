@@ -5,11 +5,12 @@ const passport = require('../passportConfig');
 
 const createUser = async (req, res) => {
     const { name, lastname, email, password } = req.body;
-
+    
     try {
         // const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({
-            name, lastname, email, password, admin: false,
+         user = await User.create({
+            name, lastname, email, password , admin: false, 
+            // description: 'asd', image: 'asd', country: 'asd', disable: false
         })
         
         res.status(201).json(user)
@@ -40,7 +41,7 @@ const loginUser = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            return res.status(200).json({ message: 'Successful login', user });
+            return res.status(200).json({ message: 'Successful login', user, authMethod: 'local'});
         });
     }
     // failureRedirect: '/login',
