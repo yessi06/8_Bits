@@ -119,7 +119,7 @@ const gamesArray = [
     "supportedPlatforms": ["PC", "PlayStation 4", "Xbox One"],
     "genre": ["RPG"],
     "price": 19.90,
-    "review": "Metacritic Score - 56/100 (Note: This score reflects the state of the game at its troubled launch; it may have improved since.)",
+    "review": "Metacritic Score - 56/100",
     "stock": 20,
   },
   {
@@ -355,7 +355,6 @@ async function createGame(req, res) {
       }
 
       for (const platformName of supportedPlatforms) {
-        console.log(platformName, "platforname");
         const platformInstance = await SupportedPlatform.findOne({ where: { name: platformName } });
         if (platformInstance) {
           await newGame.addSupportedPlatform  (platformInstance);
@@ -466,3 +465,4 @@ module.exports = {
   loadGenres,
   loadSupportedPlatform,
 };
+
