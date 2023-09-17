@@ -1,5 +1,6 @@
 const { User } = require('../db');
-const axios = require('axios')
+const axios = require('axios');
+const{sendMail} = require('../helpers/nodemailer/mailer')
 const { findUser, createUserGoogle} = require('../controllers/googleAuthControllers/googleAuthController')
 
 const loginGoogle = async (req, res) => {
@@ -26,7 +27,9 @@ const loginGoogle = async (req, res) => {
                 disable: false,
                 admin: false,
             });
+            sendMail(name, email)
             return res.status(200).json({message: 'Successful login', newUser, authMethod: 'google'});
+            
         }
 
     } catch (error) {
