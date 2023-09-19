@@ -41,6 +41,15 @@ const loginUser = (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
+            res.cookie('miCookie', JSON.stringify(user), {
+                httpOnly: false,
+                maxAge: 7 * 24 * 60 * 60 * 1000, // Duración de la cookie en milisegundos (7 días)
+                sameSite: 'None',
+                secure: true,
+                signed: true
+            });
+
             return res.status(200).json({ message: 'Successful login', user, authMethod: 'local'});
         });
     }
@@ -50,7 +59,12 @@ const loginUser = (req, res, next) => {
 };
 
 const logOutUser = (req, res) => {
-    req.logout();
-    res.status(200).json({ message: 'Logout successful' });
+    req.logout((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.clearCookie('miCookie');
+        res.status(200).json({ message: 'Logout successful' });
+    });
 }
 module.exports = { createUser, getUsers , loginUser, logOutUser };

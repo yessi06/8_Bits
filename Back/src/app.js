@@ -21,18 +21,34 @@ const server = express();
 
 server.name = 'API';
 
+const corsOptions = {
+    origin: ['http://localhost:3000', 'https://8-bits-front.vercel.app','http://127.0.0.1:3000'],
+    credentials: true
+}
+
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' })); 
-server.use(cookieParser());
+server.use(cookieParser('mi_secreto', {
+  httpOnly: true,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  sameSite: 'None',
+  secure: true, 
+}));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(morgan('dev')); 
 
 server.use(session({
     secret: '8-bits',
     resave: false,
     saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000, // Duración de la cookie de sesión en milisegundos (7 días)
+        sameSite: 'None', // Esto puede mantenerse en 'None' solo en localhost para pruebas
+        secure: true,
+    }
 }));
 
 server.use(passport.initialize());
