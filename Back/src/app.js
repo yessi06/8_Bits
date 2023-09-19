@@ -22,7 +22,7 @@ const server = express();
 server.name = 'API';
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://8-bits-front.vercel.app','http://127.0.0.1:3000'],
     credentials: true
 }
 
