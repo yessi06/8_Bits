@@ -1,4 +1,4 @@
-const { User } = require('../db');
+const { User, Reviews} = require('../db');
 const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
@@ -66,5 +66,23 @@ const logOutUser = (req, res) => {
         res.clearCookie('miCookie');
         res.status(200).json({ message: 'Logout successful' });
     });
+};
+
+const getUserById = async (req, res )=>{
+
+    try{
+        const {id} = req.params;
+    const user = await User.findOne({
+        where: {id},
+        include:{
+            model: Reviews
+        }
+    });
+
+    res.status(200).json(user)
+
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
-module.exports = { createUser, getUsers , loginUser, logOutUser };
+module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById };
