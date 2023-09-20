@@ -45,7 +45,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Game, Favorites, Genre, Licenses, Order, Post, Shopping, Reviews, SupportedPlatform } = sequelize.models;
+const { User, Game, Favorites, Genre, Licenses, Payment, Post, Shopping, Reviews, SupportedPlatform } = sequelize.models;
 
 // Relaciones de games
 Game.belongsToMany(Genre, { through: 'game_genre' });
@@ -55,11 +55,11 @@ Game.belongsToMany(SupportedPlatform, { through: 'game_supportedPlatform' });
 SupportedPlatform.belongsToMany(Game, { through: 'game_supportedPlatform' });
 
 //Relaciones de shopping
-User.hasOne (Shopping, { through: 'shopping_user' });
 Shopping.belongsToMany (User, { through: 'shopping_user' });
+User.belongsToMany (Shopping, { through: 'shopping_user' });
 
-Game.belongsToMany (Shopping, { through: 'shopping_game' });
 Shopping.belongsToMany (Game, { through: 'shopping_game' });
+Game.belongsToMany (Shopping, { through: 'shopping_game' });
 
 //Relaciones de Reviews
 
@@ -80,7 +80,6 @@ Reviews.belongsTo(Game, {
   foreignKey: 'gameId',
   targetKey: 'id'
 });
-
 
 module.exports = {
   ...sequelize.models, 
