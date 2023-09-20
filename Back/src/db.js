@@ -15,6 +15,7 @@ const {
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bits_2r2h`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  
   dialect: 'postgres',
   dialectOptions: {
     ssl: { 
@@ -59,6 +60,26 @@ Shopping.belongsToMany (User, { through: 'shopping_user' });
 
 Game.belongsToMany (Shopping, { through: 'shopping_game' });
 Shopping.belongsToMany (Game, { through: 'shopping_game' });
+
+//Relaciones de Reviews
+
+User.hasMany(Reviews, {
+  foreignKey:'userId',
+  sourceKey: 'id'
+});
+Reviews.belongsTo(User, {
+  foreignKey:'userId',
+  targetKey: 'id'
+});
+
+Game.hasMany(Reviews, {
+  foreignKey: 'gameId',
+  sourceKey: 'id'
+});
+Reviews.belongsTo(Game, {
+  foreignKey: 'gameId',
+  targetKey: 'id'
+});
 
 
 module.exports = {
