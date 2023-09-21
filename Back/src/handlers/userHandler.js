@@ -67,4 +67,27 @@ const logOutUser = (req, res) => {
         res.status(200).json({ message: 'Logout successful' });
     });
 }
-module.exports = { createUser, getUsers , loginUser, logOutUser };
+
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { name, lastname, email, password } = req.body;
+
+    try {
+        const user = await User.findOne({
+            where: { id }
+        });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        await user.update({ name, lastname, email, password });
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
+module.exports = { createUser, getUsers , loginUser, logOutUser, updateUser };
