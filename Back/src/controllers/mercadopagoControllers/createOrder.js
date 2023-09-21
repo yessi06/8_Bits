@@ -57,7 +57,7 @@ const createOrder = async (req, res) => {
         failure: "https://8-bits-front.vercel.app/Store",
         pending: "https://8-bits-front.vercel.app/Store",
       },
-      notification_url: "https://8-bits-front.vercel.app/webhook"
+      notification_url: "https://eight-bits-back.onrender.com/webhook"
     });
 
     console.log(result);
