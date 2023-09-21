@@ -6,5 +6,6 @@ const mercadopagoRouter = Router();
 
 mercadopagoRouter.post ('/', postShopping)
 mercadopagoRouter.post ('/:shoppingId', createOrder)
+mercadopagoRouter.post ('/webhook', )
 
 module.exports = mercadopagoRouter;
