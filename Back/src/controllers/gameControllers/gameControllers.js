@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Game, Genre, SupportedPlatform } = require('../../db');
+const { Game, Genre, Reviews, SupportedPlatform } = require('../../db');
 
 const getAllGames = async () => {
     try {
@@ -18,7 +18,8 @@ const getAllGames = async () => {
                     through: {
                         attributes: [],
                     },
-                }
+                },
+                
             ]
         });
         return data;
@@ -46,6 +47,10 @@ const gameById = async (id) => {
                     through: {
                         attributes: [],
                     },
+                },
+                {
+                    model: Reviews,
+                    
                 }
             ]
         });
