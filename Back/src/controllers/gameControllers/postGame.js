@@ -41,6 +41,14 @@ const postGame = async (req, res) => {
       }
   };
 
+  const putGame = async (id, changes)=>{
+    const game = await Game.findByPk(id);
+    game.set(changes)
+    await game.save();
+    return game
+
+  }
 module.exports = {
-    postGame
+    postGame,
+    putGame
 };
