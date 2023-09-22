@@ -49,7 +49,7 @@ const { User, Game, Favorites, Genre, Licenses, Payment, Post, Shopping, Reviews
 
 // Relaciones de games
 Game.belongsToMany(Genre, { through: 'game_genre' });
-Genre.belongsToMany(Game, { through: 'game_genre' });
+Genre.belongsToMany(Game, { through: 'game_genre' });8
 
 Game.belongsToMany(SupportedPlatform, { through: 'game_supportedPlatform' });
 SupportedPlatform.belongsToMany(Game, { through: 'game_supportedPlatform' });
@@ -60,6 +60,18 @@ User.belongsToMany (Shopping, { through: 'shopping_user' });
 
 Shopping.belongsToMany (Game, { through: 'shopping_game' });
 Game.belongsToMany (Shopping, { through: 'shopping_game' });
+
+//Relaciones de payment
+Payment.belongsTo(User, {
+  foreignKey: 'idUser', 
+  targetKey: 'id' 
+});
+User.hasMany(Payment, {
+  foreignKey: 'idUser',
+  sourceKey: 'id' 
+});
+
+
 
 //Relaciones de Reviews
 

@@ -12,27 +12,17 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        idUser: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true,
-        },
-        idGame: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        amount: { 
+            amount: { 
             type: DataTypes.DECIMAL, 
-            allowNull: false,
+            allowNull: true,
         },
         status: { 
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         quentity: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
     }, { timestamps: false });
 };
