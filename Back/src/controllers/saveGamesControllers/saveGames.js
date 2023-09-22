@@ -331,7 +331,6 @@ const gamesArray = [
     "review": "Metacritic Score - 85/100",
     "stock": 20,
    },
-  
     {
       "name": "Genshin Impact",
       "image": "https://res.cloudinary.com/bits8/image/upload/v1695320493/mcu3oog85w0ehkggqqam.jpg",
@@ -654,7 +653,10 @@ const listPlatform = [
   "PlayStation 5",
   "Xbox Series X/S",
   "Various consoles",
-  "Mobile devices"
+  "Mobile devices",
+  "iOS",
+  "Android",
+  "TBD",
 ];
 
 async function loadSupportedPlatform(req, res) {
