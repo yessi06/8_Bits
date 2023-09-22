@@ -331,6 +331,7 @@ const gamesArray = [
     "review": "Metacritic Score - 85/100",
     "stock": 20,
    },
+  
     {
       "name": "Genshin Impact",
       "image": "https://res.cloudinary.com/bits8/image/upload/v1695320493/mcu3oog85w0ehkggqqam.jpg",
@@ -339,7 +340,8 @@ const gamesArray = [
       "supportedPlatforms": ["PC", "PlayStation 4", "PlayStation 5", "iOS", "Android"],
       "genre":["Action RPG"],
       "price": 9.90,
-      "review": "Metacritic Score - 82/100",  
+      "review": "Metacritic Score - 82/100", 
+      "stock" : 33,
     },
     {
       "name": "Sackboy: A Big Adventure",
@@ -349,7 +351,8 @@ const gamesArray = [
       "supportedPlatforms": ["PlayStation 4", "PlayStation 5"],
       "genre": ["Platformer"],
       "price": 15.90,
-      "review": "Metacritic Score - 78/100",  
+      "review": "Metacritic Score - 78/100",
+      "stock" : 30,
     },
     {
       "name": "Star Wars Jedi: Fallen Order",
@@ -360,6 +363,7 @@ const gamesArray = [
       "genre": ["Action-Adventure"],
       "price": 25.90,
       "review": "Metacritic Score - 82/100",
+      "stock" : 45,
     },
     {
       "name": "Halo: Infinite",
@@ -370,6 +374,7 @@ const gamesArray = [
       "genre": ["First-Person Shooter"],
       "price": 29.90,
       "review": "Metacritic Score - 76/100",
+      "stock" : 55,
     },
     {
       "name": "Horizon Forbidden West",
@@ -380,6 +385,7 @@ const gamesArray = [
       "genre": ["Action RPG"],
       "price": 39.90,
       "review": "Metacritic Score - 88/100",
+      "stock" : 48,
     },
     {
       "name": "Elden Ring",
@@ -390,6 +396,7 @@ const gamesArray = [
       "genre": ["Action RPG"],
       "price": 29.90,
       "review": "Metacritic Score - 89/100",
+      "stock" : 20,
     },
     {
       "name": "Spider-Man: Miles Morales",
@@ -400,6 +407,7 @@ const gamesArray = [
       "genre": ["Action-Adventure"],
       "price": 39.90,
       "review": "Metacritic Score - 85/100",
+      "stock" : 40,
     },
     {
       "name": "Resident Evil 7: Biohazard",
@@ -410,6 +418,7 @@ const gamesArray = [
       "genre": [ "Survival Horror"],
       "price": 24.90,
       "review": "Metacritic Score - 86/100",
+      "stock" : 10,
     },
     {
       "name": "The Sims 4",
@@ -420,6 +429,7 @@ const gamesArray = [
       "genre": ["Life Simulation"],
       "price": 19.90,
       "review": "Metacritic Score - 70/100",
+      "stock" : 39,
     },
     {
       "name": "Final Fantasy XVI",
@@ -430,6 +440,7 @@ const gamesArray = [
       "genre": ["Action RPG"],
       "price": 49.90,
       "review": "Metacritic Score - 80/100",
+      "stock" : 22, 
     },
     {
       "name": "Ratchet & Clank: Rift Apart",
@@ -440,6 +451,7 @@ const gamesArray = [
       "genre": ["Action-Adventure"],
       "price": 35.90,
       "review": "Metacritic Score - 88/100",
+      "stock" : 30,
     },
     {
       "name": "FIFA 22",
@@ -450,6 +462,7 @@ const gamesArray = [
       "genre": ["Sports"],
       "price": 45.90,
       "review": "Metacritic Score - 75/100",
+      "stock" : 38,
     },
     {
       "name": "Biomutant",
@@ -460,6 +473,7 @@ const gamesArray = [
       "genre": ["Action RPG"],
       "price": 34.90,
       "review": "Metacritic Score - 65/100",
+      "stock" : 45,
     },
     {
       "name": "Watch Dogs: Legion",
@@ -470,6 +484,7 @@ const gamesArray = [
       "genre": ["Action-Adventure"],
       "price": 34.90,
       "review": "Metacritic Score - 70/100",
+      "stock" : 51,
     },
     {
       "name": "Metroid Dread",
@@ -480,6 +495,7 @@ const gamesArray = [
       "genre": ["Action-Adventure"],
       "price": 15.90,
       "review": "Metacritic Score - 88/100",
+      "stock" : 33,
     },
     {
       "name": "Returnal",
@@ -490,6 +506,7 @@ const gamesArray = [
       "genre": ["Roguelike"],
       "price": 29.90,
       "review": "Metacritic Score - 86/100",
+      "stock" : 45,
     },
     {
       "name": "Hitman 3",
@@ -500,6 +517,7 @@ const gamesArray = [
       "genre": ["Stealth"],
       "price": 25.90,
       "review": "Metacritic Score - 83/100",
+      "stock" : 22,
     },
     {
       "name": "Hogwarts Legacy",
@@ -510,6 +528,7 @@ const gamesArray = [
       "genre": ["Action RPG"],
       "price": 59.90,
       "review": "Metacritic Score - 90/100",
+      "stock" : 28,
     },
     {
       "name": "Splatoon 3",
@@ -520,6 +539,7 @@ const gamesArray = [
       "genre": ["Shooter"],
       "price": 34.90,
       "review": "Metacritic Score - 70/100",
+      "stock" : 25, 
     },
     
   ];
