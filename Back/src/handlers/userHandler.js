@@ -2,6 +2,7 @@ const { User, Reviews} = require('../db');
 const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
+const { Op } = require('sequelize');
 
 const createUser = async (req, res) => {
     const { name, lastname, email, password } = req.body;
@@ -103,7 +104,44 @@ const updateUser = async (req, res) => {
     }
 }
 
+const filterUserByNameOrEmail = async (req, res) => {
+    const { nickName, email } = req.query;
 
-module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser };
+    try {
+        if (!nickName && !email) {
+            const allUsers = await User.findAll();
+            return res.status(200).json(allUsers);
+        }
+
+        const options = {};
+
+        if (nickName) {
+            options.nickName = {
+                [Op.iLike]: `%${nickName}%`,
+            };
+        }
+
+        if (email) {
+            options.email = {
+                [Op.iLike]: `%${email}%`,
+            };
+        }
+
+        const filterUsers = await User.findAll({
+            where: options,
+        });
+
+        if (filterUsers.length === 0) {
+            res.status(200).json(`There are no results for ${nickName || email}`);
+        } else {
+            res.status(200).json(filterUsers);
+        }
+
+    } catch (error) {
+        res.status(404).json({error: error.message})
+    }
+}
+
+module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser, filterUserByNameOrEmail };
 
 
