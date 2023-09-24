@@ -6,9 +6,12 @@ const { VENDEDOR_COL } = process.env;
 
 const createOrder = async (req, res) => {
   try {
+    
     mercadopago.configure({
       access_token: VENDEDOR_COL 
     });
+
+    
 
     // Obtener la compra
     const shoppingId = req.params.shoppingId;
