@@ -1,5 +1,6 @@
 require('dotenv').config();
-const { Game, Genre, Reviews, SupportedPlatform } = require('../../db');
+const { Game, Genre, Reviews, SupportedPlatform, User } = require('../../db');
+const {getUserById} = require('../../handlers/userHandler');
 
 const getAllGames = async () => {
     try {
@@ -50,10 +51,17 @@ const gameById = async (id) => {
                 },
                 {
                     model: Reviews,
+                    include: [
+                        {
+                            model: User,
+                            attributes:["name", "nickName", "image"]
+                        }
+                    ]
                     
                 }
             ]
         });
+       
         return gameID;
     } catch (error) {
         console.error(`Error getting game with id ${id}`, error);
