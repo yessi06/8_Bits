@@ -2,7 +2,7 @@ const { User, Shopping, Game } = require("../../db.js");
 
 const postShopping = async (req, res) => {
     try {
-        const { quantity, idUser, idGame } = req.body;
+        const { quantity, idUser, cart  } = req.body;
         
         // Crear un carrito en db
         const newShopping = await Shopping.create({
@@ -16,10 +16,12 @@ const postShopping = async (req, res) => {
          await newShopping.addUser (user)
 
         // Asociar juegos
-        const game = await Game.findOne({
-          where: { id:idGame },
-        })
-         await newShopping.addGame (game)
+        for (const item of cart) {
+          const game = await Game.findOne({
+            where: { id: item.idGame }, // Aquí usa el ID del juego
+          });
+          await newShopping.addGame(game);
+        }
   
           res.status(201).json({ message: 'Shopping created successfully' });
       } catch (error) {
