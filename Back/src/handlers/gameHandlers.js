@@ -80,7 +80,7 @@ const filterGameHandler = async (req, res) => {
                 as: 'SupportedPlatforms',
             });
         }
-        console.log(options)
+
         games = await Game.findAll(options);
         res.status(200).json(games);
     } catch (error) {
