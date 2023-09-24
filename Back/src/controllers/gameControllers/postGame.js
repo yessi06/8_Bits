@@ -2,7 +2,7 @@ const { Game, Genre, SupportedPlatform } = require("../../db.js");
 
 const postGame = async (req, res) => {
     try {
-        const { name, image, description, releaseDate, supportedPlatform, genre, price, review, stock } = req.body;
+        const { name, image, description, releaseDate, SupportedPlatforms, Genres, price, review, stock } = req.body;
         // Crear un nuevo juego
         const newGame = await Game.create({
             name,
@@ -15,7 +15,7 @@ const postGame = async (req, res) => {
         });
 
         // Asociar géneros
-        for (const genreName of genre) {
+        for (const genreName of Genres) {
             const genreInstance = await Genre.findOne({ where: { name: genreName } });
             if (genreInstance) {
               await newGame.addGenre(genreInstance);
@@ -25,7 +25,7 @@ const postGame = async (req, res) => {
         }
 
         // Asociar plataformas
-        for (const platformName of supportedPlatform) {
+        for (const platformName of SupportedPlatforms) {
             const platformInstance = await SupportedPlatform.findOne({ where: { name: platformName } });
             if (platformInstance) {
               await newGame.addSupportedPlatform(platformInstance);
