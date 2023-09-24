@@ -1,6 +1,6 @@
 const validatePostGame = (req, res, next)=>{
-    const { name, image, description, releaseDate, supportedPlatform, genre, price, review, stock } = req.body;
-    if (!name || !image || !description || !releaseDate || !supportedPlatform || !genre || !price || !review || !stock) {
+    const { name, image, description, releaseDate, SupportedPlatforms, Genres, price, review, stock } = req.body;
+    if (!name || !image || !description || !releaseDate || !SupportedPlatforms || !Genres || !price || !review || !stock) {
         return res.status(400).json({ error: "Missing required fields" });
     }
 next();
