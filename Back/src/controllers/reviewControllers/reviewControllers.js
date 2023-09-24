@@ -1,7 +1,16 @@
-const {Reviews} = require('../../db');
+const {Reviews, User} = require('../../db');
 
 const getAllReviews = async ()=>{
-    const reviews = await Reviews.findAll();
+    const reviews = await Reviews.findAll({
+        include: [
+            {
+                model: User,
+                attributes:["name", "nickName", "image"]
+
+                },
+            
+        ]
+    });
     return reviews;
 }
 
