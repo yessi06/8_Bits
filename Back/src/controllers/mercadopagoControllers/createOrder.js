@@ -46,22 +46,22 @@ const createOrder = async (req, res) => {
       items: [
         {
           title: game.name,
-          user: user.id,
+          //user: user.id,
           quantity: shopping.quantity,                   
           unit_price: unitPrice, 
           currency_id: "USD",
         }
       ],
       back_urls: {
-        success: "https://8-bits-front.vercel.app/Store",
+        success: (`http://localhost:3001/mercadopago/paymentSuccess?unitPrice=${unitPrice}&shoppingQuantity=${shopping.quantity}&idUser=${user.id}&idGame=${game.id}`),
         failure: "https://8-bits-front.vercel.app/Store",
         pending: "https://8-bits-front.vercel.app/Store",
       },
-      notification_url: "https://eight-bits-back.onrender.com/webhook"
     });
 
     console.log(result);
     res.json(result);
+
   } catch (error) {
     console.error('Error creating order', error);
     res.status(500).json({ error: 'Error creating order' });

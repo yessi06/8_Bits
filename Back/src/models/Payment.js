@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Payment', { 
+    sequelize.define('Payment', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -12,11 +12,11 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-            amount: { 
-            type: DataTypes.DECIMAL, 
+        amount: {
+            type: DataTypes.DECIMAL,
             allowNull: true,
         },
-        status: { 
+        status: {
             type: DataTypes.STRING,
             allowNull: true,
         },

@@ -71,10 +71,17 @@ User.hasMany(Payment, {
   sourceKey: 'id' 
 });
 
+Payment.belongsTo(Game, {
+  foreignKey: 'idGame', 
+  targetKey: 'id' 
+});
+Game.hasMany(Payment, {
+  foreignKey: 'idGame',
+  sourceKey: 'id' 
+});
 
 
 //Relaciones de Reviews
-
 User.hasMany(Reviews, {
   foreignKey:'userId',
   sourceKey: 'id'
