@@ -7,6 +7,7 @@ const googleAuthRouter = require('./googleAuthRout.js');
 const supportedPlatformRouter = require ('./supportedPlatformRout.js');
 const reviewsRout = require('./reviewsRout.js');
 const mercadopagoRouter = require('./mercadopagoRout.js');
+const paymentRouter = require('./paymentRout.js');
 
 
 
@@ -20,6 +21,7 @@ routerPf.use('/google/auth', googleAuthRouter);
 routerPf.use('/supportedPlatform', supportedPlatformRouter);
 routerPf.use('/reviews', reviewsRout);
 routerPf.use('/mercadopago', mercadopagoRouter);
+routerPf.use('/payment', paymentRouter);
 
 
 module.exports = routerPf;
