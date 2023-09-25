@@ -1,5 +1,6 @@
 const { Payment, Game, User } = require('../db');
 
+
 const getPayments = async (req, res) => {
     try {
         const data = await Payment.findAll({
@@ -23,4 +24,19 @@ const getPayments = async (req, res) => {
     }
 };
 
-module.exports = { getPayments }
+const getPaymentsByGameId = async (req, res)=>{
+  try{
+    const {id} = req.params;
+    const payData = await Payment.findAll({
+      where: {
+        idGame: id
+      },
+    });
+    res.status(200).json(payData)
+
+  }catch(error){
+    res.status(400).json({ error: error.message });
+  }
+}
+
+module.exports = { getPayments, getPaymentsByGameId }
