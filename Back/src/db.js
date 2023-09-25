@@ -64,20 +64,24 @@ Game.belongsToMany (Shopping, { through: 'shopping_game' });
 //Relaciones de payment
 Payment.belongsTo(User, {
   foreignKey: 'idUser', 
-  targetKey: 'id' 
+  targetKey: 'id',
+  as: 'user' 
 });
 User.hasMany(Payment, {
   foreignKey: 'idUser',
-  sourceKey: 'id' 
+  sourceKey: 'id',
+  as: 'payments'
 });
 
 Payment.belongsTo(Game, {
   foreignKey: 'idGame', 
-  targetKey: 'id' 
+  targetKey: 'id',
+  as: 'game' 
 });
 Game.hasMany(Payment, {
   foreignKey: 'idGame',
-  sourceKey: 'id' 
+  sourceKey: 'id',
+  as: 'payments'
 });
 
 
