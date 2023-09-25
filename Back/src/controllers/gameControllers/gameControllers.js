@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Game, Genre, Reviews, SupportedPlatform, User } = require('../../db');
+const { Game, Genre, Reviews, SupportedPlatform, User, Payment} = require('../../db');
 const {getUserById} = require('../../handlers/userHandler');
 
 const getAllGames = async () => {
@@ -57,6 +57,12 @@ const gameById = async (id) => {
                             attributes:["name", "nickName", "image"]
                         }
                     ]
+                    
+                },
+                {
+                    model: Payment,
+                    as: "payments",
+                    attributes: ["status", "idUser"]
                     
                 }
             ]
