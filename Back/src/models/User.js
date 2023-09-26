@@ -53,6 +53,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: false,
     },
+    imageBackground: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue:"https://res.cloudinary.com/bits8/image/upload/v1695698494/Background%20profile%20images/urrrxq35zjog46z2uyqe.jpg"
+    },
     admin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
