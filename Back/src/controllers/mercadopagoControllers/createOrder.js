@@ -4,13 +4,14 @@ const { Shopping, User, Game } = require("../../db.js");
 
 const { VENDEDOR_COL } = process.env;
 
+
+
 const createOrder = async (req, res) => {
   try {
     
     mercadopago.configure({
       access_token: VENDEDOR_COL 
     });
-
     
 
     // Obtener la compra
@@ -62,13 +63,17 @@ const createOrder = async (req, res) => {
       },
     });
 
-    console.log(result);
-    res.json(result);
+    
+    
+    
+    res.json({data: result});
 
+    
   } catch (error) {
     console.error('Error creating order', error);
     res.status(500).json({ error: 'Error creating order' });
   }
 };
+
 
 module.exports = { createOrder };

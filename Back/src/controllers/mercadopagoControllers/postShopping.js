@@ -23,7 +23,7 @@ const postShopping = async (req, res) => {
           await newShopping.addGame(game);
         }
   
-          res.status(201).json({ message: 'Shopping created successfully' });
+          res.status(201).json( newShopping );
       } catch (error) {
           console.error('Error creating shopping', error);
           res.status(500).json({ error: 'Error creating shopping' });
