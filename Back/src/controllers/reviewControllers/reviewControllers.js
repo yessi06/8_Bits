@@ -29,7 +29,12 @@ return newReview
 
 const putReview =  async (id, changes)=>{
     const review = await Reviews.findByPk(id);
-    review.set(changes)
+    let update = {
+        rating: changes.rating,
+        reviewsText: changes.textReview
+        
+    }
+    review.set(update)
     await review.save()
     return review;
 };
