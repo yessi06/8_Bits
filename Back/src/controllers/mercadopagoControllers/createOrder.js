@@ -57,7 +57,7 @@ const createOrder = async (req, res) => {
         }
       ],
       back_urls: {
-        success: (`http://localhost:3001/mercadopago/paymentSuccess?unitPrice=${unitPrice}&shoppingQuantity=${shopping.quantity}&idUser=${user.id}&idGame=${game.id}`),
+        success: `http://localhost:3000/Payment-success?unitPrice=${unitPrice}&shoppingQuantity=${shopping.quantity}&gameName=${game.name}&idGame=${game.id}`,
         failure: "https://8-bits-front.vercel.app/Store",
         pending: "https://8-bits-front.vercel.app/Store",
       },
