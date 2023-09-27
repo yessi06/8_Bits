@@ -23,7 +23,7 @@ const paymentSuccess = async (req, res) => {
 
     console.log('Payment record created:', registroPago.toJSON());
 
-    res.redirect(('http://localhost:3000/Payment-success/'));
+    res.redirect(('https://8-bits-front.vercel.app/home-success/'));
   } catch (error) {
     console.error('Error creating payment record', error);
     return res.status(500).json({ error: error.message });
