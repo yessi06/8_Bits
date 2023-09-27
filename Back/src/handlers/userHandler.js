@@ -1,4 +1,4 @@
-const { User, Reviews} = require('../db');
+const { User, Reviews, Game} = require('../db');
 const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
@@ -76,7 +76,14 @@ const getUserById = async (req, res )=>{
     const user = await User.findOne({
         where: {id},
         include:{
-            model: Reviews
+            model: Reviews,
+            include: [
+                {
+                    model: Game,
+                    attributes:["name", "image"]
+                }
+
+            ]
         }
     });
 
