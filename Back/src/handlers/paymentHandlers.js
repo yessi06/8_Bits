@@ -37,6 +37,27 @@ const getPaymentsByGameId = async (req, res)=>{
   }catch(error){
     res.status(400).json({ error: error.message });
   }
-}
+};
 
-module.exports = { getPayments, getPaymentsByGameId }
+const getPaymentById = async (id) => {
+  
+      const data = await Payment.findOne({
+          include: [
+              {
+                model: User,
+                attributes: [ 'name', 'email'],
+                as: 'user', 
+              },
+              {
+                model: Game,
+                attributes: ['name','price'],
+                as: 'game',
+              },
+            ],
+            attributes: ['idPayment', 'amount', 'status', 'quentity'],
+      }) 
+      console.log(data, "dataa");
+      return data
+};
+
+module.exports = { getPayments, getPaymentsByGameId, getPaymentById}

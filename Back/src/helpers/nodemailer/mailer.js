@@ -107,11 +107,203 @@ async function sendMail(name, email, text){
             
             `
         };  
-
+    
         const result = await transporter.sendMail(mailOptions)
         return result;
+    };
 
-};
+
+    async function sendMailContact(textMail, text){
+        
+        const accessToken= await oAuth2Client.getAccessToken();
+        const transporter= await nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                type:"OAuth2",
+                user:"8eigthbits@gmail.com",
+                clientId:CLIENT_ID,
+                clientSecret:CLIENT_SECRET,
+                refreshToken:REFRESH_TOKEN,
+                accessToken:accessToken,
+            },
+        })
+
+        const mailOptions={
+            from:"8 Bits <8eigthbits@gmail.com>",
+            to: '8eigthbits@gmail.com',
+            subject: "Contacto Client",
+            html: `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Contact Us - GameZone</title>
+                <style>
+                    /* Global Styles */
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        background-color: #1a1a1a; /* Dark background color */
+                        font-family: Arial, sans-serif;
+                        color: #00FFFF; /* White text color */
+                    }
+            
+                    /* Header Styles */
+                    .header {
+                        background-color: #111; /* Dark header background color */
+                        padding: 20px;
+                        text-align: center;
+                    }
+            
+                    /* Logo Styles */
+                    .logo {
+                        max-width: 150px;
+                    }
+            
+                    /* Content Styles */
+                    .content {
+                        padding: 20px;
+                    }
+            
+                    /* Footer Styles */
+                    .footer {
+                        text-align: center;
+                        padding: 20px;
+                        background-color: #111; /* Dark footer background color */
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                   <img src="https://res.cloudinary.com/bits8/image/upload/v1694119109/oxa5f4p1tsst7xzgj6bk.png" alt="8 Bits Logo" class="logo">
+                    <h1>Contact Us - 8Bits</h1>
+                </div>
+                <div class="content">
+                    <p>8 Bits Team,</p>
+                    <p>We have received a message from a customer:</p>
+                    <p><strong>Email:</strong>${textMail}</p>
+                    <p><strong>Comment:</strong>${text}</p>
+                </div>
+                <div class="footer">
+                  <p>© 2023 8 Bits. All rights reserved.| Follow us on social media</p>
+                </div>
+            </body>
+            </html>
+            `
+        };  
+    
+        const result = await transporter.sendMail(mailOptions)
+        return result;
+    };
+
+    async function sendMailOrder(datapay){
+
+        const accessToken= await oAuth2Client.getAccessToken();
+        const transporter= await nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                type:"OAuth2",
+                user:"8eigthbits@gmail.com",
+                clientId:CLIENT_ID,
+                clientSecret:CLIENT_SECRET,
+                refreshToken:REFRESH_TOKEN,
+                accessToken:accessToken,
+            },
+        })
+
+        const mailOptions={
+            from:"8 Bits <8eigthbits@gmail.com>",
+            to: datapay.user.email,
+            subject:"Successful Purchase",
+            html: `<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Successful Purchase on 8 Bits</title>
+                <style>
+                    /* Global Styles */
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        background-color: #1a1a1a; /* Dark background color */
+                        font-family: Arial, sans-serif;
+                        color: #ffffff; /* White text color */
+                    }
+            
+                    /* Header Styles */
+                    .header {
+                        background-color: #111; /* Dark header background color */
+                        padding: 20px;
+                        text-align: center;
+                    }
+            
+                    /* Logo Styles */
+                    .logo {
+                        max-width: 150px;
+                    }
+            
+                    /* Content Styles */
+                    .content {
+                        padding: 20px;
+                    }
+            
+                    /* Purchase Details Styles */
+                    .purchase-details {
+                        background-color: #F0FFF0; /* Dark gray background for purchase details */
+                        padding: 15px;
+                        border-radius: 5px;
+                        margin-top: 20px;
+                    }
+            
+                    .item {
+                        margin-bottom: 10px;
+                    }
+            
+                    /* Footer Styles */
+                    .footer {
+                        text-align: center;
+                        padding: 20px;
+                        background-color: #111; /* Dark footer background color */
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                <img src="https://res.cloudinary.com/bits8/image/upload/v1694119109/oxa5f4p1tsst7xzgj6bk.png" alt="8 Bits Logo" class="logo">
+                    <h1>Successful Purchase on 8 Bits</h1>
+                </div>
+                <div class="content">
+                    <p>Dear ${datapay.user.name} valued customer,</p>
+                    <p>We are thrilled to inform you that your recent purchase on 8 Bits was successful! Thank you for choosing us for your gaming needs.</p>
+                    
+                    <div class="purchase-details">
+                        <h2>Purchase Details</h2>
+                        <p><strong>Order Number:</strong> #${datapay.idPayment}</p>
+                        <p><strong>Total Amount:</strong> ${datapay.amount}</p>
+                        <h3>Items:</h3>
+                        <div class="item">
+                            <p><strong>Game Title:</strong> ${datapay.game.name}</p>
+                            <p><strong>Quantity:</strong> ${datapay.quentity}</p>
+                            <p><strong>Price:</strong> ${datapay.game.price}</p>
+                        </div>
+                        <!-- Add more items as needed -->
+                    </div>
+            
+                    <p>Your digital download keys or physical shipment details will be sent to you shortly. Enjoy your gaming adventure!</p>
+                </div>
+                <div class="footer">
+                <p>© 2023 8 Bits. All rights reserved.| Follow us on social media</p>
+                </div>
+            </body>
+            </html>
+            `
+        };  
+    
+        const result = await transporter.sendMail(mailOptions)
+        return result;
+    };
+    
 
 
-module.exports = {sendMail};
+module.exports = {sendMail, sendMailContact, sendMailOrder};
