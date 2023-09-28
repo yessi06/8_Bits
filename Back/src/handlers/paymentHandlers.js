@@ -37,7 +37,28 @@ const getPaymentsByGameId = async (req, res)=>{
   }catch(error){
     res.status(400).json({ error: error.message });
   }
-}
+};
+
+const getPaymentById = async (id) => {
+  
+      const data = await Payment.findOne({
+          include: [
+              {
+                model: User,
+                attributes: [ 'name', 'email'],
+                as: 'user', 
+              },
+              {
+                model: Game,
+                attributes: ['name','price'],
+                as: 'game',
+              },
+            ],
+            attributes: ['idPayment', 'amount', 'status', 'quentity'],
+      }) 
+      console.log(data, "dataa");
+      return data
+};
 
 const getTopSellingGames = async (req, res) => {
 const Sequelize = conn;
@@ -77,4 +98,5 @@ const getTotalSales = async (req,res) => {
     }
 }
 
-module.exports = { getPayments, getPaymentsByGameId, getTopSellingGames, getTotalSales }
+module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getTopSellingGames, getTotalSales }
+

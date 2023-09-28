@@ -36,7 +36,7 @@ const deleteReviewHandler = async(req, res)=>{
     try{
         const {id} = req.params;
         await deleteReview(id);
-        res.status(204).end();
+        res.status(204).send("Deleted Review");
 
     }catch(error){
         res.status(500).json({error: error.message})
