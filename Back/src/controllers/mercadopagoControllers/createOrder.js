@@ -54,8 +54,8 @@ const createOrder = async (req, res) => {
         }));
     
         // Construir la URL de éxito con los parámetros de los juegos
-        const successURL = `https://8-bits-front.vercel.app/Payment-success?shoppingQuantity=${shopping.quantity}&${gameParams.map((params) => Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&')).join('&')}`;
-        const failureURL = `https://8-bits-front.vercel.app/Payment-failure`;
+        const successURL = `https://8-bits-front.vercel.app//Home/Payment-success?shoppingQuantity=${shopping.quantity}&${gameParams.map((params) => Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&')).join('&')}`;
+        const failureURL = `https://8-bits-front.vercel.app/Home/Payment-failure`;
 
     const result = await mercadopago.preferences.create({
       items: [
