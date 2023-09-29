@@ -39,9 +39,12 @@ const getPaymentsByGameId = async (req, res)=>{
   }
 };
 
-const getPaymentById = async (id) => {
-  
-      const data = await Payment.findOne({
+const getPaymentById = async (req, res) => {
+    
+      try{
+        const {id} = req.params
+        const data = await Payment.findOne({
+          where: {id},
           include: [
               {
                 model: User,
@@ -56,8 +59,11 @@ const getPaymentById = async (id) => {
             ],
             attributes: ['idPayment', 'amount', 'status', 'quentity'],
       }) 
-      console.log(data, "dataa");
-      return data
+      
+      res.json(data)
+      }catch(error){
+        res.status(400).json({ error: error.message });
+      }
 };
 
 const getTopSellingGames = async (req, res) => {

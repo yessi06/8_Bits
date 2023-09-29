@@ -5,7 +5,7 @@ const {sendMailOrder} = require("../../helpers/nodemailer/mailer.js")
 const paymentSuccess = async (req, res) => {
   const datosPago = req.query;
 
-  console.log(datosPago, "datooooooossdjfklsdjlfkjsdklfjkl");
+  
 
   try {
     const idPayment = datosPago.payment_id;
@@ -24,12 +24,11 @@ const paymentSuccess = async (req, res) => {
       idUser,
       idGame,
     });
-   
 
     const dataPay = await getPaymentById(registroPago.id);
 
-    console.log(dataPay, "DATAPAY");
-    const dataMailer = await sendMailOrder(dataPay)
+  
+     sendMailOrder(dataPay)
 
     res.redirect(`https://8-bits-front.vercel.app/payment-success?payment_id=${datosPago.payment_id}`);
     
