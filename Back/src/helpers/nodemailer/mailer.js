@@ -15,7 +15,7 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN})
     
 
-async function sendMail(name, email, text){
+    async function sendMail(name, email, text){
 
         const accessToken= await oAuth2Client.getAccessToken();
         const transporter= await nodemailer.createTransport({
@@ -181,8 +181,8 @@ async function sendMail(name, email, text){
                 <div class="content">
                     <p>8 Bits Team,</p>
                     <p>We have received a message from a customer:</p>
-                    <p><strong>Email:</strong>${textMail}</p>
-                    <p><strong>Comment:</strong>${text}</p>
+                    <p><strong>Email:</strong> ${textMail}</p>
+                    <p><strong>Comment:</strong> ${text}</p>
                 </div>
                 <div class="footer">
                   <p>© 2023 8 Bits. All rights reserved.| Follow us on social media</p>
@@ -303,7 +303,103 @@ async function sendMail(name, email, text){
         const result = await transporter.sendMail(mailOptions)
         return result;
     };
+
+    async function sendMailResetPassword(email, token){
+
+        const accessToken= await oAuth2Client.getAccessToken();
+        const transporter= await nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                type:"OAuth2",
+                user:"8eigthbits@gmail.com",
+                clientId:CLIENT_ID,
+                clientSecret:CLIENT_SECRET,
+                refreshToken:REFRESH_TOKEN,
+                accessToken:accessToken,
+            },
+        });
+
+
+
+        const mailOptions={
+            from:"8 Bits <8eigthbits@gmail.com>",
+            to: email,
+            subject:"Restore Password",
+            html: `<html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Password Reset - GameZone</title>
+                <style>
+                    /* Global Styles */
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        background-color: #F0FFF0; /* Dark background color */
+                        font-family: Arial, sans-serif;
+                        color: #111; /* White text color */
+                    }
+            
+                    /* Header Styles */
+                    .header {
+                        background-color: #111; /* Dark header background color */
+                        padding: 20px;
+                        text-align: center;
+                    }
+            
+                    /* Logo Styles */
+                    .logo {
+                        max-width: 150px;
+                    }
+            
+                    /* Content Styles */
+                    .content {
+                        padding: 20px;
+                    }
+            
+                    /* Button Styles */
+                    .button {
+                        display: inline-block;
+                        padding: 10px 20px;
+                        background-color: #2d7ebc; /* Blue button color */
+                        color: #ffffff; /* White button text color */
+                        text-decoration: none;
+                        border-radius: 5px;
+                    }
+            
+                    /* Footer Styles */
+                    .footer {
+                        text-align: center;
+                        padding: 20px;
+                        background-color: #111; /* Dark footer background color */
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                <img src="https://res.cloudinary.com/bits8/image/upload/v1694119109/oxa5f4p1tsst7xzgj6bk.png" alt="8 Bits Logo" class="logo">
+                    <h1>Password Reset - 8 Bits</h1>
+                </div>
+                <div class="content">
+                    <p>Dear User,</p>
+                    <p>We received a request to reset your password for your 8 Bits account. If you made this request, please follow the instructions below to reset your password:</p>
+                    <p>Click the button below to reset your password:</p>
+                    <a href="https://www.yourgamesite.com/reset-password"?token=${token} class="button">Reset Password</a>
+                    <p>If you did not request a password reset, you can safely ignore this email. Your account remains secure.</p>
+                </div>
+                <div class="footer">
+                <p>© 2023 8 Bits. All rights reserved.| Follow us on social media</p>
+                </div>
+            </body>
+            </html>
+           `
+        };  
+    
+        const result = await transporter.sendMail(mailOptions)
+        return result;
+    };
+
     
 
 
-module.exports = {sendMail, sendMailContact, sendMailOrder};
+module.exports = {sendMail, sendMailContact, sendMailOrder, sendMailResetPassword};

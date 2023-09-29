@@ -1,7 +1,8 @@
-const { User, Reviews, Game} = require('../db');
+const { User, Reviews, Game, UserPassword } = require('../db');
 const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
+const {generateHash} = require('../helpers/utils/functionsAux')
 const { Op } = require('sequelize');
 
 const createUser = async (req, res) => {
@@ -161,8 +162,58 @@ const filterUserByNameOrEmail = async (req, res) => {
     } catch (error) {
         res.status(404).json({error: error.message})
     }
-}
+};
 
-module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser, filterUserByNameOrEmail };
+const userResetPasswordHandler = async (req, res)=>{
+    try{
+        const {token} = req.params;
+        const{ password, password1 } = req.body;
+
+        const userPassword = await UserPassword.findOne({
+            where:{
+                token: token
+            }
+        });
+
+        
+         if(!userPassword){
+            return res.send("Dont exist Restore Password")
+         }
+            console.log(userPassword.isUsed, "1");
+         if(userPassword.isUsed === true){
+            return res.send("Token Expired")
+         }
+
+         if(password !== password1){
+            return res.send("Passwords do not match")
+         }
+
+         userPassword.set( "isUsed", true);
+         await userPassword.save();
+
+         console.log(userPassword.isUsed, "2");
+
+         const user = await User.findByPk(userPassword.userId);
+
+         console.log(user.name, "username");
+
+         const passwordHash = generateHash(password);
+         
+         console.log(passwordHash, "passwordHash");
+
+
+         user.set("password", passwordHash);
+          await user.save();
+
+          console.log(user, "userfinal");
+
+          res.send("Successfull")
+
+    }catch(error){
+        res.status(404).json({error: error.message});
+    }
+};
+
+module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser, filterUserByNameOrEmail, userResetPasswordHandler};
 
 
