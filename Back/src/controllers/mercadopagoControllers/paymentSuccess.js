@@ -9,7 +9,7 @@ const paymentSuccess = async (req, res) => {
     const idPayment = datosPago.payment_id;
     const status = datosPago.status;
     const amount = req.query.unitPrice;
-    const quantity = req.query.shoppingQuantity;
+    const quentity = req.query.shoppingQuantity;
     const idUser = req.query.idUser;
     const idGame = req.query.idGame;
 
@@ -20,7 +20,7 @@ const paymentSuccess = async (req, res) => {
       idPayment,
       status,
       amount,
-      quantity,
+      quentity,
       idUser,
       idGame,
     });
