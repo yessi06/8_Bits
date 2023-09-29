@@ -113,37 +113,51 @@ const updateUser = async (req, res) => {
 }
 
 const filterUserByNameOrEmail = async (req, res) => {
-    const { nickName, email } = req.query;
+    const { searchTerm, email } = req.query;
 
     try {
-        if (!nickName && !email) {
-            const allUsers = await User.findAll();
-            return res.status(200).json(allUsers);
-        }
+      if (!searchTerm && !email) {
+        const allUsers = await User.findAll();
+        return res.status(200).json(allUsers);
+      }
 
-        const options = {};
+    let options = {};
+    
+    if (searchTerm) {
+        options[Op.or] = [
+            {
+                nickName: {
+                    [Op.iLike]: `%${searchTerm}%`,
+                },
+            },
+            {
+                name: {
+                    [Op.iLike]: `%${searchTerm}%`,
+                },
+            },
+            {
+                email: {
+                    [Op.iLike]: `%${searchTerm}%`
+                },
+            },
+        ];
+    }
 
-        if (nickName) {
-            options.nickName = {
-                [Op.iLike]: `%${nickName}%`,
-            };
-        }
-
-        if (email) {
-            options.email = {
-                [Op.iLike]: `%${email}%`,
-            };
-        }
-
-        const filterUsers = await User.findAll({
-            where: options,
-        });
-
-        if (filterUsers.length === 0) {
-            res.status(200).json(`There are no results for ${nickName || email}`);
-        } else {
-            res.status(200).json(filterUsers);
-        }
+    if (email) {
+        options.email = {
+            [Op.iLike]: `%${email}%`,
+        };
+    }
+  
+      const filterUsers = await User.findAll({
+        where: options,
+      });
+  
+      if (filterUsers.length === 0) {
+        res.status(200).json(`There are no results for ${searchTerm}`);
+      } else {
+        res.status(200).json(filterUsers);
+      }
 
     } catch (error) {
         res.status(404).json({error: error.message})
