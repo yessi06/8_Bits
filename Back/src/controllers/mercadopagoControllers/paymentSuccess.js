@@ -9,29 +9,29 @@ const paymentSuccess = async (req, res) => {
     const idPayment = datosPago.payment_id;
     const status = datosPago.status;
     const amount = req.query.unitPrice;
-    const quentity = req.query.shoppingQuantity;
+    const quantity = req.query.shoppingQuantity;
     const idUser = req.query.idUser;
     const idGame = req.query.idGame;
 
+    console.log('idPayment:', idPayment);
+    console.log('status:', status);
 
     const registroPago = await Payment.create({
       idPayment,
       status,
       amount,
-      quentity,
+      quantity,
       idUser,
       idGame,
     });
     console.log(registroPago, "registro pago");
     console.log('Payment record created:', registroPago.toJSON());
 
-    res.redirect(('https://8-bits-front.vercel.app/home'));
-    //--------------------------------------------
 
+    res.redirect(`https://8-bits-front.vercel.app/payment-success`);
+    
     const dataPay = await getPaymentById(registroPago.id);
-
     const dataMailer = await sendMailOrder(dataPay)
-//------------------------------------------------------
     
   } catch (error) {
     console.error('Error creating payment record', error);
