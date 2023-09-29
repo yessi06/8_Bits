@@ -98,7 +98,6 @@ const getTotalSales = async (req,res) => {
     }
 }
 
-module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getTopSellingGames, getTotalSales }
 
 
 const getPaymentsByUserId = async (req, res)=>{
@@ -115,11 +114,10 @@ const getPaymentsByUserId = async (req, res)=>{
       }
     });
     res.status(200).json(payData)
-
+    
   }catch(error){
     res.status(400).json({ error: error.message });
   }
 };
 
-
-module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getPaymentsByUserId}
+module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getTopSellingGames, getTotalSales, getPaymentsByUserId }
