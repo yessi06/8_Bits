@@ -31,7 +31,7 @@ const paymentSuccess = async (req, res) => {
     console.log(dataPay, "DATAPAY");
     const dataMailer = await sendMailOrder(dataPay)
 
-    res.redirect(`https://8-bits-front.vercel.app/payment-success`);
+    res.redirect(`https://8-bits-front.vercel.app/payment-success?payment_id=${datosPago.payment_id}`);
     
     
     
