@@ -112,33 +112,41 @@ const updateUser = async (req, res) => {
 }
 
 const filterUserByNameOrEmail = async (req, res) => {
-    const { searchTerm } = req.query;
+    const { searchTerm, email } = req.query;
 
     try {
-      if (!searchTerm) {
+      if (!searchTerm && !email) {
         const allUsers = await User.findAll();
         return res.status(200).json(allUsers);
       }
-  
-      const options = {
-        [Op.or]: [
-          {
-            nickName: {
-              [Op.iLike]: `%${searchTerm}%`,
+
+    let options = {};
+    
+    if (searchTerm) {
+        options[Op.or] = [
+            {
+                nickName: {
+                    [Op.iLike]: `%${searchTerm}%`,
+                },
             },
-          },
-          {
-            email: {
-              [Op.iLike]: `%${searchTerm}%`,
+            {
+                name: {
+                    [Op.iLike]: `%${searchTerm}%`,
+                },
             },
-          },
-          {
-            name: {
-              [Op.iLike]: `%${searchTerm}%`,
+            {
+                email: {
+                    [Op.iLike]: `%${searchTerm}%`
+                },
             },
-          },
-        ],
-      };
+        ];
+    }
+
+    if (email) {
+        options.email = {
+            [Op.iLike]: `%${email}%`,
+        };
+    }
   
       const filterUsers = await User.findAll({
         where: options,
