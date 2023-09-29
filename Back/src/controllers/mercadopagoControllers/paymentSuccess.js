@@ -1,4 +1,6 @@
 const { Payment } = require("../../db.js");
+const {getPaymentById} = require("../../handlers/paymentHandlers.js");
+const {sendMailOrder} = require("../../helpers/nodemailer/mailer.js")
 
 const paymentSuccess = async (req, res) => {
   const datosPago = req.query;
@@ -22,10 +24,15 @@ const paymentSuccess = async (req, res) => {
       idUser,
       idGame,
     });
-
+    console.log(registroPago, "registro pago");
     console.log('Payment record created:', registroPago.toJSON());
 
+
     res.redirect(`https://8-bits-front.vercel.app/payment-success`);
+    
+    const dataPay = await getPaymentById(registroPago.id);
+    const dataMailer = await sendMailOrder(dataPay)
+    
   } catch (error) {
     console.error('Error creating payment record', error);
     return res.status(500).json({ error: error.message });

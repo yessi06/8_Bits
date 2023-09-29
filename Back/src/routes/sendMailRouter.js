@@ -1,9 +1,11 @@
 const {Router} = require('express');
-const {mailerHandler} = require('../handlers/mailerHandlers');
+const {mailerHandler, mailerContactHandler } = require('../handlers/mailerHandlers');
 
 const mailRouter = Router();
 
-mailRouter.post('/', mailerHandler);
+mailRouter.post('/', mailerHandler );
+mailRouter.post('/contact', mailerContactHandler );
+// mailRouter.post('/order', mailerOrderHandler)
 
 module.exports =  mailRouter;
 
