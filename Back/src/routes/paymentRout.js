@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { getPayments,getPaymentsByGameId, getPaymentById } = require('../handlers/paymentHandlers');
+const { getPayments,getPaymentsByGameId, getPaymentsByUserId } = require('../handlers/paymentHandlers');
 
 const paymentRouter = Router();
 
 paymentRouter.get('/', getPayments);
 paymentRouter.get('/:id', getPaymentsByGameId);
-// paymentRouter.get('/order/:id', getPaymentById)
+paymentRouter.get('/user/:id', getPaymentsByUserId)
 
 module.exports = paymentRouter;
