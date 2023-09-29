@@ -100,3 +100,26 @@ const getTotalSales = async (req,res) => {
 
 module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getTopSellingGames, getTotalSales }
 
+
+const getPaymentsByUserId = async (req, res)=>{
+  try{
+    const {id} = req.params;
+    const payData = await Payment.findAll({
+      where: {
+        idUser: id
+      },
+      include:{
+        model: Game,
+        attributes:["id", "name", "image"],
+        as: "game"
+      }
+    });
+    res.status(200).json(payData)
+
+  }catch(error){
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+module.exports = { getPayments, getPaymentsByGameId, getPaymentById, getPaymentsByUserId}
