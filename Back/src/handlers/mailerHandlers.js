@@ -1,4 +1,6 @@
-const {sendMail, sendMailContact} = require('../helpers/nodemailer/mailer')
+const {sendMail, sendMailContact, sendMailResetPassword} = require('../helpers/nodemailer/mailer')
+const {User, UserPassword} = require('../db');
+const { generateRamdomString } = require('../helpers/utils/functionsAux');
 
 const mailerHandler = async (req, res)=>{
     
@@ -13,6 +15,7 @@ const mailerHandler = async (req, res)=>{
 
 const mailerContactHandler= async(req, res)=>{
     try{
+        console.log(req.body, "bodysss");
         const {textMail, text} = req.body;
         await sendMailContact(textMail, text);
         res.status(200).send("We will contact you, Thank you")
@@ -22,15 +25,51 @@ const mailerContactHandler= async(req, res)=>{
     }
 };
 
-// const mailerOrderHandler= async(req, res)=>{
-//     try{
-//         const {textMail, text} = req.body;
-//         await sendMailContact(textMail, text);
-//         res.status(200).send("We will contact you, Thank you")
+const mailerResetPasswordHandler = async (req, res)=>{
+    
+    try{
+        const {email} = req.params;
 
-//     }catch(error){
-//         res.status(404).json({error: error.message});
-//     }
-// }
+        const user = await User.findOne({
+            where:{
+                email: email
+            }
+        });
+        
+        if(!user){
+            return res.json("Email Incorrect")
+        };
 
-module.exports={mailerHandler, mailerContactHandler};
+        let userPassword = await UserPassword.findOne({
+            where:{
+                userId : user.id,
+                isUsed: false
+            }
+        });
+
+        if(userPassword){
+            userPassword.set('isUsed', true);
+            userPassword.save();
+        };
+
+        const token = generateRamdomString(16);
+
+        console.log(token, "token");
+
+        userPassword = await UserPassword.create({
+            userId : user.id,
+            email: email,
+            token: token,
+            isUsed: false
+        })
+  await sendMailResetPassword(email, token);
+  await userPassword.save(); 
+  res.status(200).send("Send Email")
+
+    }catch(error){
+        res.status(404).json({error: error.message});
+    }
+
+}
+
+module.exports={mailerHandler, mailerContactHandler, mailerResetPasswordHandler};
