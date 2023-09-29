@@ -25,14 +25,12 @@ const paymentSuccess = async (req, res) => {
       idGame,
     });
 
-    const dataPay = await getPaymentById(registroPago.id);
-
-  
-     sendMailOrder(dataPay)
+    
 
     res.redirect(`https://8-bits-front.vercel.app/payment-success?payment_id=${datosPago.payment_id}`);
     
-    
+    const dataPay = await getPaymentById(registroPago.id);
+     await sendMailOrder(dataPay)
     
   } catch (error) {
     console.error('Error creating payment record', error);
