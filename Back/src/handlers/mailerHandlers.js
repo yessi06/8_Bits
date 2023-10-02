@@ -29,7 +29,7 @@ const mailerResetPasswordHandler = async (req, res)=>{
     
     try{
         const {email} = req.params;
-        console.log(email, "email");
+         console.log(email, "email");
 
         const user = await User.findOne({
             where:{

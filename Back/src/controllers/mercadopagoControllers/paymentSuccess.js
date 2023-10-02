@@ -32,6 +32,7 @@ const paymentSuccess = async (req, res) => {
     const dataPay = await getPaymentById(registroPago.id);
      await sendMailOrder(dataPay)
     
+     
   } catch (error) {
     console.error('Error creating payment record', error);
     return res.status(500).json({ error: error.message });
