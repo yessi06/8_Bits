@@ -45,7 +45,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Game, Favorites, Genre, Licenses, Payment, Post, Shopping, Reviews, SupportedPlatform, UserPassword} = sequelize.models;
+const { User, Game, Favorites, Genre, Licenses, Payment, Post, Shopping, Reviews, SupportedPlatform, UserPassword, Background} = sequelize.models;
 
 // Relaciones de games
 Game.belongsToMany(Genre, { through: 'game_genre' });
@@ -108,6 +108,12 @@ Reviews.belongsTo(Game, {
 
 User.hasMany(UserPassword,{
   foreignKey: 'userId'
+});
+ //------------------
+
+User.hasOne(Background,{
+  foreignKey: 'userId'
+
 });
 
 module.exports = {
