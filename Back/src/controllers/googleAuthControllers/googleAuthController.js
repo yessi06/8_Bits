@@ -1,4 +1,4 @@
-const { User } = require('../../db')
+const { User, Background } = require('../../db')
 
 const findUser = async (email) => {
     const existingUser = await User.findOne({
@@ -18,7 +18,10 @@ const createUserGoogle = async ({ email, name, lastname, password, disable, admi
         disable,
         admin,
     })
-    console.log(createdUser);
+     let userId = createdUser.id
+
+     const background = await Background.create({userId});
+
     return createdUser;
 }
 

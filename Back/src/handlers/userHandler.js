@@ -1,20 +1,20 @@
-const { User, Reviews, Game, UserPassword } = require('../db');
+const { User, Reviews, Game, UserPassword, Background} = require('../db');
 const {sendMail} = require('../helpers/nodemailer/mailer');
 const bcrypt = require('bcrypt');
 const passport = require('../passportConfig');
 const {generateHash} = require('../helpers/utils/functionsAux')
 const { Op } = require('sequelize');
 
+
 const createUser = async (req, res) => {
     const { name, lastname, email, password } = req.body;
     
     try {
-        // const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
             name, lastname, email, password , admin: false, 
-            // description: 'asd', image: 'asd', country: 'asd', disable: false
         })
-        
+        let userId = user.id;
+       const background =  await Background.create({userId})
         res.status(201).json(user)
         sendMail(name, email)
     } catch (error) {
@@ -25,6 +25,17 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
     try {
         const data = await User.findAll()
+        const prueba = await data.map(async (user)=>{
+            console.log(user, "useer");
+            let userId = user.id;
+            console.log(userId, "useerdid");
+          let usuarios =  await  Background.findOrCreate({
+            where: {userId}
+          })
+
+        })
+        console.log(prueba, "pruebaaa");
+        console.log();
         res.status(200).json(data)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -76,16 +87,21 @@ const getUserById = async (req, res )=>{
         const {id} = req.params;
     const user = await User.findOne({
         where: {id},
-        include:{
-            model: Reviews,
-            include: [
-                {
-                    model: Game,
-                    attributes:["name", "image"]
-                }
-
-            ]
-        }
+        include:[
+            {
+                model: Background,
+                attributes:["backgroundImage"],
+            },
+            {
+                model: Reviews,
+                include: [
+                    {
+                        model: Game,
+                        attributes:["name", "image"]
+                    }
+                ],  
+            }  
+        ],   
     });
 
     res.status(200).json(user)
@@ -214,6 +230,23 @@ const userResetPasswordHandler = async (req, res)=>{
     }
 };
 
-module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser, filterUserByNameOrEmail, userResetPasswordHandler};
+const putBackground = async( req, res )=>{
+    
+   try {
+    
+    const {userId, backgroundImage} = req.body;
+    const newBackground = await Background.findOne({
+        where: {userId}
+    });
+    
+    newBackground.set({backgroundImage});
+    await newBackground.save();
+    res.status(200).json(newBackground);
+   } catch (error) {
+    res.status(500).json({ error: error.message });
+   }
+}
+
+module.exports = { createUser, getUsers , loginUser, logOutUser, getUserById, updateUser, filterUserByNameOrEmail, userResetPasswordHandler, putBackground};
 
 
