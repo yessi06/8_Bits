@@ -29,13 +29,14 @@ const mailerResetPasswordHandler = async (req, res)=>{
     
     try{
         const {email} = req.params;
+         console.log(email, "email");
 
         const user = await User.findOne({
             where:{
                 email: email
             }
         });
-        
+         console.log(user, "user");
         if(!user){
             return res.json("Email Incorrect")
         };

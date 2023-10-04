@@ -370,9 +370,9 @@ oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN})
                     /* Footer Styles */
                     .footer {
                         text-align: center;
-                        padding: 20px;
+                        padding: 2  0px;
                         background-color: #111; /* Dark footer background color */
-                    }
+                    }             
                 </style>
             </head>
             <body>
@@ -384,7 +384,7 @@ oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN})
                     <p>Dear User,</p>
                     <p>We received a request to reset your password for your 8 Bits account. If you made this request, please follow the instructions below to reset your password:</p>
                     <p>Click the button below to reset your password:</p>
-                    <a href="https://www.yourgamesite.com/reset-password"?token=${token} class="button">Reset Password</a>
+                    <a href="https://8-bits-front.vercel.app/ResetPassword?token=${token}" class="button">Reset Password</a>
                     <p>If you did not request a password reset, you can safely ignore this email. Your account remains secure.</p>
                 </div>
                 <div class="footer">
