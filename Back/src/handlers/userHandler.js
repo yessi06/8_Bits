@@ -25,17 +25,6 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
     try {
         const data = await User.findAll()
-        const prueba = await data.map(async (user)=>{
-            console.log(user, "useer");
-            let userId = user.id;
-            console.log(userId, "useerdid");
-          let usuarios =  await  Background.findOrCreate({
-            where: {userId}
-          })
-
-        })
-        console.log(prueba, "pruebaaa");
-        console.log();
         res.status(200).json(data)
     } catch (error) {
         res.status(400).json({error: error.message})
